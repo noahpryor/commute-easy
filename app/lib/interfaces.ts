@@ -1,3 +1,5 @@
+import {Trip} from "./googleMapsApi";
+
 export interface Settings {
   key?: any;
   mode: string
@@ -7,15 +9,7 @@ export interface Settings {
   destinations: string;
 };
 
-
 export interface Listing {
   location: string;
   id:  string;
-  distance?: string;
-  duration?: string;
-  origin?: string;
-  destination?: string;
-  status?: string;
-  mode?: string;
-  directionsUrl?: string;
 };

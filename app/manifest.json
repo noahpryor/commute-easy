@@ -30,10 +30,11 @@
   "content_scripts": [
     {
       "matches": [
-        "https://streeteasy.com/**/*"
+        "https://streeteasy.com/for-rent/**/*",
+        "https://streeteasy.com/for-sale/**/*"
       ],
       "js": [
-        "scripts/contentscript.js"
+        "scripts/searchResultsContent.js"
       ],
       "run_at": "document_end",
       "all_frames": false

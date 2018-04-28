@@ -10,7 +10,11 @@ const DEFAULT_SETTINGS: Settings = {
   destinations: "16 W 22nd St 10010"
 }
 
-export function getSettings() {
+interface StringKeyedMap {
+  [key: string]: any;
+}
+
+export function getSettings(): Promise<Settings> {
   return browser.storage.sync.get(DEFAULT_SETTINGS)
 }
 
@@ -19,11 +23,11 @@ export function setSettings(data: any) {
 }
 
 export function getSetting(key: string) {
-  return getSettings().then(data => data[key])
+  return getSettings().then((data: StringKeyedMap) => data[key])
 }
 
 export function setSetting(key: string, value: any) {
-  const data: { [key: string]: any } = {}
+  const data: StringKeyedMap = {}
   data[key] = value
   return setSettings(data)
 }
