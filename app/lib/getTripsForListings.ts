@@ -1,15 +1,10 @@
-import {Listing, Settings} from "./interfaces"
+import {Listing, Trip, ListingWithTrip} from "./interfaces"
 import {
+  DistanceMatrixApiParams,
   buildGoogleMapsDirectionUrl,
   getTrips,
-  Trip
 } from "./googleMapsApi";
 
-
-
-export interface ListingWithTrip extends Listing {
-  trip: Trip
-}
 
 const mapTripsToListings = (trips: Trip[], listings: Listing[]): ListingWithTrip[] => {
   return trips.map((trip: any, listingIndex: number) => {
@@ -19,7 +14,7 @@ const mapTripsToListings = (trips: Trip[], listings: Listing[]): ListingWithTrip
 }
 
 // Fetch transit times
-export async function addTripsToListings(listings: Listing[], settings: Settings): Promise<ListingWithTrip[]> {
+export default async function addTripsToListings(listings: Listing[], settings: DistanceMatrixApiParams): Promise<ListingWithTrip[]> {
   const origins = listings.map((listing: Listing) => listing.location)
 
   const trips = await getTrips(origins, settings)

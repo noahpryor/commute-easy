@@ -1,12 +1,17 @@
-import {searchResultsVisible, addTripsToSearchResults} from "../lib/content/searchResults"
+
+import SearchResults from "../lib/content/SearchResults"
+
+import updatePageContent from "../lib/updatePageContent"
+
+import {PageContent} from "../lib/interfaces"
 
 
 function checkForResults() {
   console.log("Checking for search results..")
-  if(searchResultsVisible()) {
+  if(SearchResults.visible()) {
     console.log("listings visible")
     clearTimeout(timer);
-    addTripsToSearchResults()
+    updatePageContent(SearchResults)
   }
 }
 

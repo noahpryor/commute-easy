@@ -1,7 +1,7 @@
 // Wrapper around google maps API
 
 // https://www.google.com/maps/dir/?api=1&parameters
-
+import {Trip} from "./interfaces"
 interface DirectionsParams {
   travelmode: string;
   origin: string;
@@ -45,16 +45,6 @@ export interface DistanceMatrixApiParams {
   origins: string;
   destinations: string;
 };
-
-export interface Trip {
-  arrivalTime: string;
-  destination: string;
-  directionsUrl: string;
-  distance: string;
-  duration: string;
-  mode: string;
-  origin: string;
-}
 
 const DISTANCE_MATRIX_API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json"
 const DIRECTIONS_URL = "https://www.google.com/maps/dir/"

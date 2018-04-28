@@ -31,7 +31,7 @@
     {
       "matches": [
         "https://streeteasy.com/for-rent/**/*",
-        "https://streeteasy.com/for-sale/**/*"
+        "https://streeteasy.com/**/*"
       ],
       "js": [
         "scripts/searchResultsContent.js"

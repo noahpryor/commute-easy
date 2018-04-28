@@ -1,6 +1,6 @@
 // Dispatches requests to the google transit api
 // Used to bypass cors in the content script;
-import {addTripsToListings} from "../lib/commuteApi"
+import getTripsForListings from "../lib/getTripsForListings"
 import {getSettings} from "../lib/commuteSettings";
 import {Listing} from "../lib/interfaces"
 interface MessageData {
@@ -17,7 +17,7 @@ async function handleMessage(request: Message) {
   if(request.action === "getTripsForListings") {
     console.log("getTripsForListings", request);
     const settings = await getSettings()
-    const listingsWithTrips = await addTripsToListings(request.data.listings, settings)
+    const listingsWithTrips = await getTripsForListings(request.data.listings, settings)
     const response = {listings: listingsWithTrips}
     console.log("response", response)
     return response

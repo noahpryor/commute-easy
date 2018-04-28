@@ -1,9 +1,8 @@
+import {DistanceMatrixApiParams} from "./googleMapsApi"
 
-import {Settings} from "./interfaces"
-
-const DEFAULT_SETTINGS: Settings = {
+const DEFAULT_SETTINGS: DistanceMatrixApiParams = {
   key: null,
-  mode: "transit",
+  mode: "driving",
   arrival_time: "1524664830", // 10 am
   units: "imperial",
   origins: "158 powers st 11211",
@@ -14,7 +13,7 @@ interface StringKeyedMap {
   [key: string]: any;
 }
 
-export function getSettings(): Promise<Settings> {
+export function getSettings(): Promise<DistanceMatrixApiParams> {
   return browser.storage.sync.get(DEFAULT_SETTINGS)
 }
 

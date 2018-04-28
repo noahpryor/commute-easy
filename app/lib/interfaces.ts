@@ -1,15 +1,28 @@
-import {Trip} from "./googleMapsApi";
 
-export interface Settings {
-  key?: any;
-  mode: string
-  arrival_time: string;
-  units: string;
-  origins: string;
-  destinations: string;
-};
 
 export interface Listing {
   location: string;
   id:  string;
 };
+
+export interface ListingWithTrip extends Listing {
+  trip: Trip
+}
+
+
+export interface Trip {
+  arrivalTime: string;
+  destination: string;
+  directionsUrl: string;
+  distance: string;
+  duration: string;
+  mode: string;
+  origin: string;
+}
+
+
+export interface PageContent {
+  visible(): boolean;
+  listings(): Listing[];
+  updateListingsWithTrips(listings: ListingWithTrip[]): void;
+}
