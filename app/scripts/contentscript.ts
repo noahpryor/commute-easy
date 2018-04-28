@@ -1,7 +1,9 @@
 console.log(`'Allo 'Allo! Content script`)
 
-function getListingData(listing) {
-  const location = listing.attributes["se:map:point"].value;
+import {Listing} from "../lib/interfaces"
+
+function getListingData(listing: HTMLElement): Listing {
+  const location: string = listing.getAttribute("se:map:point")
   const id = listing.id;
   return {
     location,
@@ -9,20 +11,21 @@ function getListingData(listing) {
   };
 }
 
-const getCommutes = listings => {
+const getCommutes = (listings: Listing[]): Promise<Listing[]> => {
   return browser.runtime.sendMessage({
     action: "getCommutes",
     data: {listings}
   }).then(response => {
 
     console.log("getCommutes response", response)
-    return response.data
+    console.log(JSON.stringify(response.data.listings))
+    return response.data.listings
   });
 };
 
 
 // Add commute time to the listing
-function addCommuteTimeToListing(listing) {
+function addCommuteTimeToListing(listing: Listing): Listing {
   const priceElement = document.querySelector(`#${listing.id} ul.details_info`)
     .parentElement;
   const commuteExists = document.querySelector(`#${listing.id}-commute`)
@@ -35,7 +38,7 @@ function addCommuteTimeToListing(listing) {
   return listing
 }
 
-function commuteInfoListItem(listing) {
+function commuteInfoListItem(listing: Listing) {
   const destination = listing.destination.split(",")[0]
   return `
   <li id="${listing.id}-commute" class="details_info details-info-flex commute-easy">
@@ -47,9 +50,8 @@ function commuteInfoListItem(listing) {
   </li>`;
 }
 
-const noCommuteAdded = (listing) => (document.querySelector(`#${listing.id}-commute`) == null)
-const getListings = () => [...document.querySelectorAll("main > article")].map(getListingData).filter(noCommuteAdded)
-
+const noCommuteAdded = (listing: Listing) => (document.querySelector(`#${listing.id}-commute`) == null)
+const getListings = (): Listing[] => Array.from(document.querySelectorAll("main > article")).map(getListingData).filter(noCommuteAdded)
 
 const listingsVisible = () => document.querySelectorAll('#result-details main.listings article').length > 0
 // Wait for listings to show up on the page
@@ -59,9 +61,9 @@ const timer = setInterval(setCommutesIfListings, 1000);
 function addCommuteTimesToStreetEasy() {
   const listings = getListings()
   console.log("adding commute times");
-  return getCommutes(listings).then(({listings}) => {
+  return getCommutes(listings).then((listings: Listing[]) => {
 
-    listings.forEach(listing => addCommuteTimeToListing(listing))
+    listings.forEach((listing: Listing) => addCommuteTimeToListing(listing))
     return listings
   });
 }
@@ -75,24 +77,3 @@ function setCommutesIfListings() {
     addCommuteTimesToStreetEasy()
   }
 }
-
-function onRequest(request, sender, sendResponse) {
-  if (request.action === 'add-commutes') {
-    console.log("adding commute times");
-    addCommuteTimesToStreetEasy().then(data => {
-      console.log("commute times added", data)
-      sendResponse(data)
-    })
-  }
-}
-
-const sendMessage = (message) => {
-  return new Promise((resolve, reject) => {
-    browser.runtime.sendMessage(message, response => {
-      response.error ? reject(response) : resolve(response)
-    })
-  })
-}
-
-console.log("loaded listings parser")
-browser.runtime.onMessage.addListener(onRequest);

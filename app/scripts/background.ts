@@ -1,8 +1,28 @@
 import {getSettings} from "../lib/commuteSettings"
 
+import {Listing, Settings} from "../lib/interfaces"
 const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json"
 
-const formatCommuteInfo = (json) => {
+
+interface ElementData {
+  text: string;
+}
+interface Element {
+  distance: ElementData;
+  duration: ElementData;
+}
+
+interface Row {
+  elements: Element[]
+}
+
+interface DistanceMatrixResponse {
+  origin_addresses: string[]
+  destination_addresses: string[]
+  rows: Row[]
+}
+
+const formatCommuteInfo = (json: DistanceMatrixResponse) => {
   const nestedCommutes = json.rows.map((row, originIndex) => {
     const origin = json.origin_addresses[originIndex]
     return row.elements.map((commute, destinationIndex) => {
@@ -19,8 +39,8 @@ const formatCommuteInfo = (json) => {
   return commutes
 }
 
-const mapCommutesToListings = (commuteTimes, listings, mode) => {
-  return commuteTimes.map((commuteTime, listingIndex) => {
+const mapCommutesToListings = (commuteTimes: any, listings: Listing[], mode: string) => {
+  return commuteTimes.map((commuteTime: any, listingIndex: number) => {
     const listing = listings[listingIndex];
     const directionsUrl = getDirectionsUrl({
       origin: commuteTime.origin,
@@ -47,8 +67,21 @@ const mapCommutesToListings = (commuteTimes, listings, mode) => {
 // travelmode (optional): Defines the method of travel. Options are driving, walking (which prefers pedestrian paths and sidewalks, where available), bicycling (which routes via bike paths and preferred streets where available), or transit. If no travelmode is specified, the Google Map shows one or more of the most relevant modes for the specified route and/or user preferences.
 
 // dir_action=navigate (optional): Launches either turn-by-turn navigation or route preview to the specified destination, based on whether the origin is available. If the user specifies an origin and it is not close to the user's current location, or the user's current location is unavailable, the map launches a route preview. If the user does not specify an origin (in which case the origin defaults to the user's current location), or the origin is close to the user's current location, the map launches turn-by-turn navigation. Note that navigation is not available on all Google Maps products and/or between all destinations; in those cases this parameter will be ignored.
-function getDirectionsUrl({origin, destination, mode}) {
-  const params = {
+interface DirectionsParams {
+  travelmode: string;
+  origin: string;
+  destination: string;
+  api?: number;
+}
+interface DirectionsOptions {
+  origin: string;
+  destination: string;
+  mode: string;
+}
+
+function getDirectionsUrl(options: DirectionsOptions) {
+  const {origin, mode, destination} = options
+  const params: DirectionsParams = {
     api: 1,
     travelmode: mode,
     origin,
@@ -60,10 +93,10 @@ function getDirectionsUrl({origin, destination, mode}) {
 
 
 // different origins have to be joined together by pipes
-const getCommuteTimes = async (listings) => {
+const getCommuteTimes = async (listings: Listing[]) => {
   const defaultParams = await getSettings()
   console.log(defaultParams)
-  const origins = listings.map(({location}) => location).join("|");
+  const origins = listings.map((listing: Listing) => listing.location).join("|");
   const params = Object.assign(defaultParams, {origins})
 
   const url = [baseUrl, toQuery(params)].join("?")
@@ -79,8 +112,16 @@ const getCommuteTimes = async (listings) => {
 }
 console.log("background script loaded")
 
+interface MessageData {
+  listings: Listing[];
+}
 
-function handleMessage(request) {
+interface Message {
+  action: string;
+  data: MessageData;
+}
+
+function handleMessage(request: Message) {
   // return {data: {listings: []}}
   if(request.action === "getCommutes") {
     console.log("getCommutes", request);
@@ -95,7 +136,7 @@ function handleMessage(request) {
 
 browser.runtime.onMessage.addListener(handleMessage)
 
-function toQuery(params) {
+function toQuery(params: any) {
   const esc = encodeURIComponent
   return Object.keys(params)
     .map(k => esc(k) + '=' + esc(params[k]))
