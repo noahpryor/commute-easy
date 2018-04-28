@@ -3,3 +3,4 @@ dist/
 packages/
 npm-debug.log
 .env
+coverage/

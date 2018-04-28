@@ -2,9 +2,11 @@
   "name": "CommuteEasy",
   "version": "0.0.3",
   "description": "Show commute times on StreetEasy listings",
+  "license": "MIT",
   "scripts": {
     "dev": "webextension-toolbox dev",
-    "build": "webextension-toolbox build"
+    "build": "webextension-toolbox build",
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^58.0.2",
@@ -17,5 +19,19 @@
     "jest": "^22.4.3",
     "ts-jest": "^22.4.4"
   },
-  "license": "MIT"
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+
 }

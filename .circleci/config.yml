@@ -22,5 +22,8 @@ jobs:
           paths:
             - node_modules/
       - run:
+          name: test
+          command: yarn test
+      - run:
           name: build-chrome
           command: yarn run build chrome

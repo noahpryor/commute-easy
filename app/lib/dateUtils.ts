@@ -7,6 +7,12 @@ function getNextDayOfWeek(date: Date, dayOfWeek: number): Date {
     return resultDate;
 }
 
+const toMsEpoch = (time: Date) => time.valueOf()
+
+const toSecondsEpoch = (time: Date) => {
+  return Math.round(toMsEpoch(time) / 1000)
+}
+
 export function timeToMondaySecondsEpoch(time: string): number {
   const now = new Date()
   const [hours, minutes] = time.split(":")
@@ -24,10 +30,3 @@ export function secondsEpochToTime(epochSeconds: number) {
   const minutes = date.getMinutes().toString().padStart(2,"0")
   return `${hours}:${minutes}`
 }
-
-const toMsEpoch = (time: Date) => time.valueOf()
-
-const toSecondsEpoch = (time: Date) => {
-  return Math.round(toMsEpoch(time) / 1000)
-}
-
