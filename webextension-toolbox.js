@@ -7,11 +7,9 @@ const { resolve } = require('path')
 module.exports = {
   webpack: (config, { dev, vendor }) => {
     // Perform customizations to webpack config
-    console.log(config.plugins)
-
     // Automatically resolve the following extensions:
     config.resolve = {
-      extensions: ['.js', '.json', '.mjs', '.jsx', '.ts', '.tsx']
+      extensions: ['.js', '.json', '.mjs', '.jsx', '.ts', '.tsx', '.d.ts']
     }
 
     /******************************/
