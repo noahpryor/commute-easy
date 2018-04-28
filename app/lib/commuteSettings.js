@@ -1,5 +1,5 @@
 const DEFAULT_SETTINGS = {
-  key: "CHANGEME",
+  key: null,
   mode: "transit",
   arrival_time: "1524664830", // 10 am
   units: "imperial",
