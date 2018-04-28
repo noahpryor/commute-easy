@@ -9,7 +9,7 @@ function setInput(elem) {
     .then(value => elem.value = value)
 }
 
-const optionSelectors =  document.querySelectorAll(".storage-input")
+const optionSelectors = document.querySelectorAll(".storage-input")
 
 function setupInput(elem) {
   console.log("setting up input", elem)

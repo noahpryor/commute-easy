@@ -48,7 +48,7 @@ function commuteInfoListItem(listing) {
 }
 
 const noCommuteAdded = (listing) => (document.querySelector(`#${listing.id}-commute`) == null)
-const getListings = () => [...document.querySelectorAll("main > article")].map(getListingData).filter(noCommuteAdded)
+const getListings = () => Array.from(document.querySelectorAll("main > article")).map(getListingData).filter(noCommuteAdded)
 
 
 const listingsVisible = () => document.querySelectorAll('#result-details main.listings article').length > 0
