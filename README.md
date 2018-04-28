@@ -1,11 +1,9 @@
 # CommuteEasy
 
-Chrome extension that adds commute times to [StreetEasy](https://streeteasy.com) listings.
+Chrome extension that adds commute times to [StreetEasy](https://streeteasy.com) and craigslist listings.
 
-Show commute times on StreetEasy listings
-![Listings Screenshot](/promo/listings-screenshot.png)
-
-
+![StreetEasy Listings Screenshot](/promo/listings-screenshot.png)
+![Listings Screenshot](/promo/craigslist-listing-screenshot.png)
 
 ## Install
 
