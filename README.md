@@ -1,5 +1,5 @@
 # CommuteEasy
-
+[![CircleCI](https://circleci.com/gh/noahpryor/commute-easy.svg?style=svg)](https://circleci.com/gh/noahpryor/commute-easy)
 Chrome extension that adds commute times to [StreetEasy](https://streeteasy.com) and craigslist listings.
 
 ![StreetEasy Listings Screenshot](/promo/listings-screenshot.png)
