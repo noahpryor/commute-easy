@@ -1,7 +1,6 @@
 import {DistanceMatrixApiParams} from "./googleMapsApi"
 
 const DEFAULT_SETTINGS: DistanceMatrixApiParams = {
-  key: null,
   mode: "driving",
   arrival_time: "1524664830", // 10 am
   units: "imperial",

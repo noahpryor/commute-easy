@@ -13,6 +13,7 @@ const getTripsForListings = (listings: Listing[]): Promise<ListingWithTrip[]> =>
   })
 };
 
+export {getTripsForListings}
 export default async function updatePageContent(pageContent: PageContent) {
   const listings = pageContent.listings()
   const listingsWithTrips = await getTripsForListings(listings)

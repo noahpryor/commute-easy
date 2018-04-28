@@ -38,7 +38,6 @@ interface QueryParams {
 }
 
 export interface DistanceMatrixApiParams {
-  key?: any;
   mode: string
   arrival_time: string;
   units: string;
@@ -46,7 +45,7 @@ export interface DistanceMatrixApiParams {
   destinations: string;
 };
 
-const DISTANCE_MATRIX_API_URL = "https://maps.googleapis.com/maps/api/distancematrix/json"
+const DISTANCE_MATRIX_API_URL = "https://distancematrix-api.glitch.me/maps/api/distancematrix/json"
 const DIRECTIONS_URL = "https://www.google.com/maps/dir/"
 
 // https://developers.google.com/maps/documentation/distance-matrix/

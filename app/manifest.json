@@ -38,6 +38,17 @@
       ],
       "run_at": "document_end",
       "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.craigslist.org/*"
+      ],
+      "js": [
+        "scripts/craigslist.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
     }
+
   ]
 }
