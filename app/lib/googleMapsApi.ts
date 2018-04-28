@@ -39,7 +39,7 @@ interface QueryParams {
 
 export interface DistanceMatrixApiParams {
   mode: string
-  arrival_time: string;
+  arrival_time: number;
   units: string;
   origins: string;
   destinations: string;
@@ -55,7 +55,7 @@ const getDistanceMatrix = (params: DistanceMatrixApiParams): Promise<DistanceMat
            .then(response => response.json())
 }
 
-const formatTrip = (element: Element, origin: string, destination: string, mode: string, arrivalTime: string) => {
+const formatTrip = (element: Element, origin: string, destination: string, mode: string, arrivalTime: number) => {
   const distance = element.distance.text
   const duration = element.duration.text
 

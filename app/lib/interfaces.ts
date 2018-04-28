@@ -11,7 +11,7 @@ export interface ListingWithTrip extends Listing {
 
 
 export interface Trip {
-  arrivalTime: string;
+  arrivalTime: number;
   destination: string;
   directionsUrl: string;
   distance: string;

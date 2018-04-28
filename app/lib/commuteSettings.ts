@@ -1,8 +1,9 @@
 import {DistanceMatrixApiParams} from "./googleMapsApi"
+import {timeToMondaySecondsEpoch,secondsEpochToTime} from "./dateUtils"
 
 const DEFAULT_SETTINGS: DistanceMatrixApiParams = {
   mode: "driving",
-  arrival_time: "1524664830", // 10 am
+  arrival_time: 1525093200, // 10 am
   units: "imperial",
   origins: "158 powers st 11211",
   destinations: "16 W 22nd St 10010"
@@ -30,3 +31,14 @@ export function setSetting(key: string, value: any) {
   return setSettings(data)
 }
 
+
+
+export function setArrivalTime(time: string) {
+  const arrivalTime = timeToMondaySecondsEpoch(time);
+  console.log(arrivalTime)
+  return setSetting("arrival_time", arrivalTime)
+}
+
+export function getArrivalTime(): Promise<string> {
+  return getSetting("arrival_time").then(secondsEpochToTime)
+}
