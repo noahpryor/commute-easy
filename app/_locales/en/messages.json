@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "CommuteEasy",
+    "description": "The name of the application"
+  },
+  "appShortName": {
+    "message": "CommuteEasy",
+    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
+  },
+  "appDescription": {
+    "message": "Show commute times on StreetEasy listings",
+    "description": "The description of the application"
+  },
+  "browserActionTitle": {
+    "message": "CommuteEasy",
+    "description": "The title of the browser action button"
+  }
+}
