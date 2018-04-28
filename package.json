@@ -11,5 +11,10 @@
     "ts-loader": "^4.2.0",
     "typescript": "^2.8.3",
     "webextension-toolbox": "latest"
+  },
+  "dependencies": {
+    "@types/jest": "^22.2.3",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4"
   }
 }
