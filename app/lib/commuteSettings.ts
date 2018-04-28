@@ -1,16 +1,18 @@
+import {DistanceMatrixApiParams} from "./googleMapsApi"
 
-import {Settings} from "./interfaces"
-
-const DEFAULT_SETTINGS: Settings = {
-  key: null,
-  mode: "transit",
+const DEFAULT_SETTINGS: DistanceMatrixApiParams = {
+  mode: "driving",
   arrival_time: "1524664830", // 10 am
   units: "imperial",
   origins: "158 powers st 11211",
   destinations: "16 W 22nd St 10010"
 }
 
-export function getSettings() {
+interface StringKeyedMap {
+  [key: string]: any;
+}
+
+export function getSettings(): Promise<DistanceMatrixApiParams> {
   return browser.storage.sync.get(DEFAULT_SETTINGS)
 }
 
@@ -19,11 +21,11 @@ export function setSettings(data: any) {
 }
 
 export function getSetting(key: string) {
-  return getSettings().then(data => data[key])
+  return getSettings().then((data: StringKeyedMap) => data[key])
 }
 
 export function setSetting(key: string, value: any) {
-  const data: { [key: string]: any } = {}
+  const data: StringKeyedMap = {}
   data[key] = value
   return setSettings(data)
 }

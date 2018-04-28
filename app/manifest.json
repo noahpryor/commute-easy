@@ -30,13 +30,25 @@
   "content_scripts": [
     {
       "matches": [
+        "https://streeteasy.com/for-rent/**/*",
         "https://streeteasy.com/**/*"
       ],
       "js": [
-        "scripts/contentscript.js"
+        "scripts/searchResultsContent.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.craigslist.org/*"
+      ],
+      "js": [
+        "scripts/craigslist.js"
       ],
       "run_at": "document_end",
       "all_frames": false
     }
+
   ]
 }
