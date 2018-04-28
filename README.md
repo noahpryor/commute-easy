@@ -3,7 +3,7 @@
 Chrome extension that adds commute times to [StreetEasy](https://streeteasy.com) listings.
 
 Show commute times on StreetEasy listings
-![Listings Screenshot](/promo/shared/listings-screenshot.png)
+![Listings Screenshot](/promo/listings-screenshot.png)
 
 
 
