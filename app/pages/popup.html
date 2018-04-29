@@ -12,18 +12,23 @@
         <fieldset>
             <legend>CommuteEasy</legend>
 
-            <label for="mode">Mode</label>
-            <select name="mode" class="storage-input" id="mode">
-              <option>transit</option>
-              <option>driving</option>
-              <option>walking</option>
-              <option>bicycling</option>
-            </select>
-
-            <label for="destinations">Destination</label>
-            <input type="text" class="storage-input" name="destinations" id="destinations" />
-            <label for="arrivalTime">Arrive By</label>
-            <input type="time" name="arrivalTime" id="arrivalTime" />
+            <div class="pure-control-group">
+              <label for="mode">Mode</label>
+              <select name="mode" class="storage-input" id="mode">
+                <option>transit</option>
+                <option>driving</option>
+                <option>walking</option>
+                <option>bicycling</option>
+              </select>
+            </div>
+            <div class="pure-control-group">
+              <label for="destinations">Destination</label>
+              <input type="text" class="storage-input" name="destinations" id="destinations" />
+            </div>
+            <div class="pure-control-group">
+              <label for="arrivalTime">Arrive by</label>
+              <input type="time" name="arrivalTime" id="arrivalTime" />
+            </div>
         </fieldset>
     </form>
 

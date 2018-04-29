@@ -18,7 +18,7 @@ module.exports = {
     const entries = []
 
     // Add main entry glob
-    entries.push(resolve('app', '*.{ts,tsx,js,mjs,jsx}'))
+    // entries.push(resolve('app', '*.{ts,tsx,js,mjs,jsx}'))
     entries.push(resolve('app', '?(scripts)/*.{ts,tsx,js,mjs,jsx}'))
 
     // We use the GlobEntriesPlugin in order to

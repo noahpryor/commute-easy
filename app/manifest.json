@@ -27,8 +27,7 @@
     "storage",
     "https://maps.googleapis.com/**/*"
   ],
-  "content_scripts": [
-    {
+  "content_scripts": [{
       "matches": [
         "https://streeteasy.com/for-rent/**/*",
         "https://streeteasy.com/**/*"
@@ -38,13 +37,23 @@
       ],
       "run_at": "document_end",
       "all_frames": false
-    },
-    {
+    }, {
       "matches": [
         "https://*.craigslist.org/*"
       ],
+      "exclude_matches": ["https://*.craigslist.org/search/*"],
+
       "js": [
-        "scripts/craigslist.js"
+        "scripts/craigslistListing.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }, {
+      "matches": [
+        "https://*.craigslist.org/search/*"
+      ],
+      "js": [
+        "scripts/craigslistSearch.js"
       ],
       "run_at": "document_end",
       "all_frames": false

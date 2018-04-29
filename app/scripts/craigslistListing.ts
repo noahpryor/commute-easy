@@ -34,5 +34,5 @@ function updateListings() {
 
   return addTripToListing(listing)
 }
-
+console.log("I'm on a listing page")
 updateListings()

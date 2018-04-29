@@ -5,6 +5,13 @@ body {
   padding-right: 5px;
   line-height: 1.4;
   width: 150px;
-  height: 200px;
   /*background-color: #eee;*/
+}
+
+input {
+  width: 100%;
+}
+
+select {
+  width: 100%;
 }
