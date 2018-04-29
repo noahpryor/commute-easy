@@ -1,48 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <title>Popup</title>
-  <link rel="stylesheet" type="text/css" href="../styles/popup.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Popup</title>
+    <link rel="stylesheet" href="../styles/purecss-forms.css">
+    <link rel="stylesheet" type="text/css" href="../styles/popup.css">
 
-  <div id="app" class="popup-content">
-    <h1 class="app-name">CommuteEasy</h1>
-    <div class="grid">
-      <div class="unit whole center-on-mobiles">
-        <div class="option">
-          <div class="option-group text-center">
-            <label>Mode</label>
+  </head>
+  <body>
+    <form class="pure-form pure-form-stacked">
+        <fieldset>
+            <legend>CommuteEasy</legend>
+
+            <label for="mode">Mode</label>
             <select name="mode" class="storage-input" id="mode">
-              <option name="transit">transit</option>
-              <option name="driving">driving</option>
-              <option name="walking">walking</option>
-              <option name="bicycling">bicycling</option>
+              <option>transit</option>
+              <option>driving</option>
+              <option>walking</option>
+              <option>bicycling</option>
             </select>
-          </div>
-          <div class="option-group text-center">
-            <label>
-            Destination</label>
+
+            <label for="destinations">Destination</label>
             <input type="text" class="storage-input" name="destinations" id="destinations" />
-          </div>
-          <div class="option-group text-center">
-            <label>
-            Arrive By</label>
-            <input type="time" class="" value="09:00" name="arrivalTime" id="arrivalTime" />
-          </div>
-          <div class="option text-muted">
+            <label for="arrivalTime">Arrive By</label>
+            <input type="time" name="arrivalTime" id="arrivalTime" />
+        </fieldset>
+    </form>
 
-<!--             <label>
-              Api Key (required for transit commutes)<a href="https://developers.google.com/maps/documentation/distance-matrix/start#get-a-key" target="_blank">(get)</a>
-            </label>
-            <input type="password" class="storage-input" name="key" id="key" />
- -->      </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="../scripts/popup.js"></script>
-</body>
+    <script src="../scripts/popup.js"></script>
+  </body>
 </html>
