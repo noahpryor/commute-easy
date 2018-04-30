@@ -1,27 +1,36 @@
 console.log("I am injected")
+// Craigslist globals
+declare const CL: any;
+declare const L: any;
+interface Shape {
+  shell: number[];
+  holes: number[];
+}
 
-const addShape = (shape, map) => {
+interface Result {
+  shapes: Shape[];
+}
+
+
+const addShape = (shape: Shape, map: any) => {
   L.polygon([shape.shell, shape.holes]).addTo(map)
 }
 
-const addResultsToMap = (results, map) => {
+const addResultsToMap = (results: Result[], map: any) => {
   results.map(result => result.shapes.map(shape => addShape(shape, map)))
 }
 
-const addTransitTimeToMap = async (map) => {
+const addTransitTimeToMap = async (map: any) => {
   const data = await fetch("https://distancematrix-api.glitch.me/test/").then(response => response.json())
   addResultsToMap(data.results, map)
 }
 
-// Check if map is on page
-
-
-
-// CL.maps exists if the page can show a map (e.g. a search results page)
-// CL.maps.map holds the leaflet map global once the map has been visible
 
 const timer = setInterval(addMapIfVisible, 1000);
 
+// Check if map is on page
+// CL.maps exists if the page can show a map (e.g. a search results page)
+// CL.maps.map holds the leaflet map global once the map has been visible
 function addMapIfVisible() {
   if(!CL.maps) {
     console.log("No map on page, ejecting")

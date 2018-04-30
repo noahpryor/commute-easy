@@ -9,7 +9,6 @@ export interface ListingWithTrip extends Listing {
   trip: Trip
 }
 
-
 export interface Trip {
   arrivalTime: number;
   destination: string;
@@ -19,7 +18,6 @@ export interface Trip {
   mode: string;
   origin: string;
 }
-
 
 export interface PageContent {
   visible(): boolean;
