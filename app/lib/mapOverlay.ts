@@ -13,7 +13,7 @@ interface Result {
 }
 
 const addShape = (shape: Shape, map: any) => {
-  L.polygon([shape.shell, shape.holes]).addTo(map)
+  L.polygon([shape.shell, shape.holes], {color: "#1EB300", opacity: 0.3}).addTo(map)
 }
 
 const addResultsToMap = (result: Result, map: any) => {

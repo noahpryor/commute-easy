@@ -83,6 +83,7 @@ function setupInput(elem: HTMLInputElement) {
   setInput(elem)
   elem.addEventListener("change", saveInput)
 }
+
 const optionSelectors = document.querySelectorAll(".storage-input")
 
 optionSelectors.forEach(setupInput)
