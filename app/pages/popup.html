@@ -14,7 +14,7 @@
 
             <div class="pure-control-group">
               <label for="mode">Mode</label>
-              <select name="mode" class="storage-input" id="mode">
+              <select name="mode" class="storage-input full-width" id="mode">
                 <option>transit</option>
                 <option>driving</option>
                 <option>walking</option>
@@ -24,12 +24,16 @@
 
             <div class="pure-control-group">
               <label for="address-input">Destination</label>
-              <input type="text" id="address-input" placeholder="Destination" />
+              <input type="text" id="address-input" class="full-width" style="height: 30px;" placeholder="Destination" />
             </div>
 
             <div class="pure-control-group">
               <label for="arrivalTime">Arrive by</label>
-              <input type="time" name="arrivalTime" id="arrivalTime" />
+              <input type="time" class="full-width" name="arrivalTime" id="arrivalTime" />
+            </div>
+            <div class="pure-control-group">
+              <label for="commuteMinutes">Max Commute (minutes)</label>
+              <input type="number" class="storage-input full-width" name="commuteMinutes" id="commuteMinutes" />
             </div>
         </fieldset>
     </form>

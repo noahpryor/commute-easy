@@ -8,10 +8,7 @@ body {
   /*background-color: #eee;*/
 }
 
-input {
-  width: 100%;
-}
 
-select {
+.full-width {
   width: 100%;
 }

@@ -23,7 +23,8 @@ const post = (url: string, data: any) => {
 interface TravelTimeMapParams {
   latitude: number
   longitude: number
-  arrival_time: string
+  arrivalTime: Date
+  commuteSeconds: number
   mode: string
 }
 
@@ -48,8 +49,8 @@ const getTravelTimeMap = (params: TravelTimeMapParams) => {
         transportation: {
           type: transportationType,
         },
-        arrival_time: params.arrival_time,
-        travel_time: 1800,
+        arrival_time: params.arrivalTime.toISOString(),
+        travel_time: params.commuteSeconds,
         range: {
           enabled: true,
           width: 3600,
@@ -62,10 +63,12 @@ const getTravelTimeMap = (params: TravelTimeMapParams) => {
 
 const getCommuteTimeMap = async () => {
   const settings = await getSettings()
-  const arrival_time = new Date(settings.arrival_time * 1000).toISOString()
+  const arrivalTime = new Date(settings.arrival_time * 1000)
   const coordinates = settings.destination.coordinates
+  const commuteSeconds = settings.commuteMinutes * 60
   return getTravelTimeMap({
-    arrival_time,
+    arrivalTime,
+    commuteSeconds,
     mode: settings.mode,
     ...coordinates,
   }).then((data: any) => data.results[0])

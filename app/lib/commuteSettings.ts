@@ -16,6 +16,7 @@ export interface Settings {
   mode: string
   arrival_time: number
   units: string
+  commuteMinutes: number
   destination: Destination
 }
 
@@ -23,6 +24,7 @@ const DEFAULT_SETTINGS: Settings = {
   mode: "driving",
   arrival_time: 1525093200, // 10 am
   units: "imperial",
+  commuteMinutes: 30,
   destination: {
     name:
       "16 West 22nd Street, New York City, New York, United States of America",

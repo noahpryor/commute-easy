@@ -16,15 +16,13 @@ interface Latlng {
 interface Suggestion {
   value: string
   latlng: Latlng
+  name: string
+  city: string
 }
+
 interface EventAutocomplete {
   suggestion: Suggestion
 }
-
-const optionSelectors = document.querySelectorAll(".storage-input")
-const arrivalTimeInput: HTMLInputElement = document.querySelector(
-  "#arrivalTime"
-)
 
 function saveInput() {
   setSetting(this.name, this.value)
@@ -41,8 +39,9 @@ function saveArrivalTime() {
 
 const saveDestination = (event: EventAutocomplete) => {
   const { suggestion } = event
+  console.log("suggestion", suggestion)
   const destination = {
-    name: suggestion.value,
+    name: `${suggestion.name}, ${suggestion.city}`,
     coordinates: {
       latitude: suggestion.latlng.lat,
       longitude: suggestion.latlng.lng,
@@ -62,7 +61,7 @@ const setupDestinationInput = async () => {
   addressInput.value = destination.name
 
   const placeAutocomplete = places({
-    container: addressInput,
+    container: addressInput
   })
 
   placeAutocomplete.on("change", saveDestination)
@@ -73,6 +72,9 @@ const setupDestinationInput = async () => {
 async function setupArrivalTimeInput() {
   const time = await getArrivalTime()
   console.log(time)
+  const arrivalTimeInput: HTMLInputElement = document.querySelector(
+    "#arrivalTime"
+  )
   arrivalTimeInput.value = time
   arrivalTimeInput.addEventListener("change", saveArrivalTime)
 }
@@ -81,6 +83,7 @@ function setupInput(elem: HTMLInputElement) {
   setInput(elem)
   elem.addEventListener("change", saveInput)
 }
+const optionSelectors = document.querySelectorAll(".storage-input")
 
 optionSelectors.forEach(setupInput)
 
