@@ -52,9 +52,7 @@ const saveDestination = (event: EventAutocomplete) =>  {
 
 
   setSetting("destination", destination)
-    .then(() => {
-      getCommuteTimeMap().then(data => browser.storage.local.set({commuteMap: data}))
-    })
+
 }
 
 const setupDestinationInput = async () => {

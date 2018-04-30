@@ -1,5 +1,5 @@
 import {Listing} from "../lib/interfaces"
-import {injectMapOverlay} from "../lib/injectMapOverlay"
+import {injectCraigslistMapOverlay} from "../lib/injectMapOverlay"
 
 function getJSONSearchResultsUrl() {
   return document.location.toString().replace("/search/","/jsonsearch/")
@@ -29,4 +29,4 @@ async function getListings() {
 console.log("on listings page")
 
 
-injectMapOverlay()
+injectCraigslistMapOverlay()

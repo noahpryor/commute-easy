@@ -35,9 +35,17 @@ const addScript = async (scriptPath: string, data: any) => {
   return document.head.appendChild(script);
 }
 
-export async function injectMapOverlay() {
+export async function injectStreeteasyMapOverlay() {
   const mapData = await getMapData()
-
-  addScript("scripts/inject.js", mapData)
+  addScript("scripts/streeteasyMapOverlay.js", mapData)
 }
+
+export async function injectCraigslistMapOverlay() {
+  const mapData = await getMapData()
+  console.log(mapData)
+  addScript("scripts/craigslistMapOverlay.js", mapData)
+}
+
+
+
 

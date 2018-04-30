@@ -2,7 +2,7 @@
 import {getTripsForListings} from "../lib/updatePageContent"
 import formatTrip from "../lib/formatTrip"
 import {Listing, ListingWithTrip} from "../lib/interfaces"
-import {injectMapOverlay} from "../lib/injectMapOverlay"
+import {injectCraigslistMapOverlay} from "../lib/injectMapOverlay"
 
 const getPostId = () => {
   let pathParts = document.location.pathname.split("/")
@@ -41,11 +41,5 @@ updateListings()
 // Content scripts don't share a js context/environ,ent
 // with the page, so to add transit data to maps
 // we have to inject a script
+injectCraigslistMapOverlay()
 
-
-injectMapOverlay()
-
-
-
-
-// debugger

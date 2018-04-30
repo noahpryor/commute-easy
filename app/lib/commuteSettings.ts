@@ -1,5 +1,11 @@
-import {DistanceMatrixApiParams} from "./googleMapsApi"
-import {timeToMondaySecondsEpoch,secondsEpochToTime} from "./dateUtils"
+import {
+  DistanceMatrixApiParams
+} from "./googleMapsApi"
+import {
+  timeToMondaySecondsEpoch,
+  secondsEpochToTime
+} from "./dateUtils"
+import {getCommuteTimeMap} from "./travelTimeApi";
 
 
 interface Coordinates {
@@ -36,12 +42,19 @@ interface StringKeyedMap {
   [key: string]: any;
 }
 
+function updateCommuteTimeMapCache() {
+  return getCommuteTimeMap()
+           .then(data => browser.storage.local.set({commuteMap: data}))
+           .then(() => console.log("Commute map cache updated"))
+}
+
 export function getSettings(): Promise<Settings> {
   return browser.storage.sync.get(DEFAULT_SETTINGS)
 }
 
 export function setSettings(data: any) {
   return browser.storage.sync.set(data)
+          .then(updateCommuteTimeMapCache)
 }
 
 export function getSetting(key: string) {
