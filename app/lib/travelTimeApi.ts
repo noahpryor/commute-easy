@@ -63,7 +63,7 @@ const getTravelTimeMap = (params: TravelTimeMapParams) => {
 
 const getCommuteTimeMap = async () => {
   const settings = await getSettings()
-  const arrivalTime = new Date(settings.arrival_time * 1000)
+  const arrivalTime = new Date(settings.arrivalTime)
   const coordinates = settings.destination.coordinates
   const commuteSeconds = settings.commuteMinutes * 60
   return getTravelTimeMap({

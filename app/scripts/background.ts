@@ -4,6 +4,7 @@ import getTripsForListings from "../lib/getTripsForListings"
 import { getSettings } from "../lib/commuteSettings"
 import { getCommuteTimeMap } from "../lib/travelTimeApi"
 import { Listing } from "../lib/interfaces"
+
 interface MessageData {
   listings: Listing[]
 }
@@ -17,10 +18,11 @@ async function handleMessage(request: Message) {
   // return {data: {listings: []}}
   if (request.action === "getTripsForListings") {
     console.log("getTripsForListings", request)
-    const { mode, units, arrival_time, destination } = await getSettings()
+    const { mode, units, arrivalTime, destination } = await getSettings()
     const destinations = `${destination.coordinates.latitude},${
       destination.coordinates.longitude
     }`
+    const arrival_time = Math.round(arrivalTime / 1000)
 
     const tripOptions = { mode, units, arrival_time, destinations }
 
@@ -33,13 +35,5 @@ async function handleMessage(request: Message) {
     return response
   }
 }
-
-getCommuteTimeMap()
-  .then(data => browser.storage.local.set({ commuteMap: data }))
-  .then(() => {
-    browser.storage.local.get("commuteMap").then(console.log)
-  })
-
-browser.storage.local.get("commuteMap").then(data => console.log("map", data))
 
 browser.runtime.onMessage.addListener(handleMessage)

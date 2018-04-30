@@ -1,5 +1,5 @@
 import { DistanceMatrixApiParams } from "./googleMapsApi"
-import { timeToMondaySecondsEpoch, secondsEpochToTime } from "./dateUtils"
+import { timeToMondayEpoch, epochToTime } from "./dateUtils"
 import { getCommuteTimeMap } from "./travelTimeApi"
 
 interface Coordinates {
@@ -14,7 +14,7 @@ interface Destination {
 
 export interface Settings {
   mode: string
-  arrival_time: number
+  arrivalTime: number
   units: string
   commuteMinutes: number
   destination: Destination
@@ -22,7 +22,7 @@ export interface Settings {
 
 const DEFAULT_SETTINGS: Settings = {
   mode: "driving",
-  arrival_time: 1525093200, // 10 am
+  arrivalTime: 1525093200000, // 10 am
   units: "imperial",
   commuteMinutes: 30,
   destination: {
@@ -64,11 +64,11 @@ export function setSetting(key: string, value: any) {
 }
 
 export function setArrivalTime(time: string) {
-  const arrivalTime = timeToMondaySecondsEpoch(time)
+  const arrivalTime = timeToMondayEpoch(time)
   console.log(arrivalTime)
-  return setSetting("arrival_time", arrivalTime)
+  return setSetting("arrivalTime", arrivalTime)
 }
 
 export function getArrivalTime(): Promise<string> {
-  return getSetting("arrival_time").then(secondsEpochToTime)
+  return getSetting("arrivalTime").then(epochToTime)
 }

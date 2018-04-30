@@ -13,18 +13,17 @@ const toSecondsEpoch = (time: Date) => {
   return Math.round(toMsEpoch(time) / 1000)
 }
 
-export function timeToMondaySecondsEpoch(time: string): number {
+export function timeToMondayEpoch(time: string): number {
   const now = new Date()
   const [hours, minutes] = time.split(":")
   const nextMonday = getNextDayOfWeek(now, 1)
   nextMonday.setHours(parseInt(hours))
   nextMonday.setMinutes(parseInt(minutes))
   nextMonday.setSeconds(0)
-  return toSecondsEpoch(nextMonday)
+  return nextMonday.valueOf()
 }
 
-export function secondsEpochToTime(epochSeconds: number) {
-  const epochMs = epochSeconds * 1000
+export function epochToTime(epochMs: number) {
   const date = new Date(epochMs)
   const hours = date
     .getHours()

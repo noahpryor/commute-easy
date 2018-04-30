@@ -11,7 +11,7 @@ export interface Trip {
   arrivalTime: number
   destination: string
   directionsUrl: string
-  distance: string
+  distance?: string
   duration: string
   mode: string
   origin: string
