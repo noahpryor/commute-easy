@@ -4,14 +4,11 @@ body {
   padding-left: 5px;
   padding-right: 5px;
   line-height: 1.4;
-  width: 150px;
+  width: 300px;
   /*background-color: #eee;*/
 }
 
-input {
-  width: 100%;
-}
 
-select {
+.full-width {
   width: 100%;
 }

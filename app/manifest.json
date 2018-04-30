@@ -2,7 +2,7 @@
   "name": "__MSG_appName__",
   "short_name": "__MSG_appShortName__",
   "description": "__MSG_appDescription__",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "manifest_version": 2,
   "default_locale": "en",
   "icons": {
@@ -27,13 +27,17 @@
     "storage",
     "https://maps.googleapis.com/**/*"
   ],
+  "web_accessible_resources": [
+    "scripts/craigslistMapOverlay.js",
+    "scripts/streeteasyMapOverlay.js"
+  ],
   "content_scripts": [{
       "matches": [
         "https://streeteasy.com/for-rent/**/*",
         "https://streeteasy.com/**/*"
       ],
       "js": [
-        "scripts/searchResultsContent.js"
+        "scripts/streeteasySearch.ts"
       ],
       "run_at": "document_end",
       "all_frames": false

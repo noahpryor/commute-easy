@@ -1,18 +1,19 @@
-import {Listing} from "../lib/interfaces"
+import { Listing } from "../lib/interfaces"
+import { injectCraigslistMapOverlay } from "../lib/injectMapOverlay"
 
 function getJSONSearchResultsUrl() {
-  return document.location.toString().replace("/search/","/jsonsearch/")
+  return document.location.toString().replace("/search/", "/jsonsearch/")
 }
 interface Result {
-  Latitude: number;
-  Longitude: number;
-  PostingID: number;
+  Latitude: number
+  Longitude: number
+  PostingID: number
 }
 const formatResult = (result: Result): Listing => {
   const location = `${result.Latitude}${result.Longitude}`
   return {
     id: result.PostingID.toString(),
-    location
+    location,
   }
 }
 // Hit the maps API to get the lat longs for listings
@@ -23,4 +24,8 @@ async function getListings() {
   const [results] = await fetch(searchUrl).then(res => res.json())
   return results.map(formatResult)
 }
-getListings().then(console.log)
+// getListings().then(console.log)
+
+console.log("on listings page")
+
+injectCraigslistMapOverlay()

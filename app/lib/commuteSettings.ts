@@ -1,24 +1,56 @@
-import {DistanceMatrixApiParams} from "./googleMapsApi"
-import {timeToMondaySecondsEpoch,secondsEpochToTime} from "./dateUtils"
+import { DistanceMatrixApiParams } from "./googleMapsApi"
+import { timeToMondayEpoch, epochToTime } from "./dateUtils"
+import { getCommuteTimeMap } from "./travelTimeApi"
 
-const DEFAULT_SETTINGS: DistanceMatrixApiParams = {
+interface Coordinates {
+  latitude: number
+  longitude: number
+}
+
+interface Destination {
+  name: string
+  coordinates: Coordinates
+}
+
+export interface Settings {
+  mode: string
+  arrivalTime: number
+  units: string
+  commuteMinutes: number
+  destination: Destination
+}
+
+const DEFAULT_SETTINGS: Settings = {
   mode: "driving",
-  arrival_time: 1525093200, // 10 am
+  arrivalTime: 1525093200000, // 10 am
   units: "imperial",
-  origins: "158 powers st 11211",
-  destinations: "16 W 22nd St 10010"
+  commuteMinutes: 30,
+  destination: {
+    name:
+      "16 West 22nd Street, New York City, New York, United States of America",
+    coordinates: {
+      latitude: 40.7422,
+      longitude: -73.9933,
+    },
+  },
 }
 
 interface StringKeyedMap {
-  [key: string]: any;
+  [key: string]: any
 }
 
-export function getSettings(): Promise<DistanceMatrixApiParams> {
+function updateCommuteTimeMapCache() {
+  return getCommuteTimeMap()
+    .then(data => browser.storage.local.set({ commuteMap: data }))
+    .then(() => console.log("Commute map cache updated"))
+}
+
+export function getSettings(): Promise<Settings> {
   return browser.storage.sync.get(DEFAULT_SETTINGS)
 }
 
 export function setSettings(data: any) {
-  return browser.storage.sync.set(data)
+  return browser.storage.sync.set(data).then(updateCommuteTimeMapCache)
 }
 
 export function getSetting(key: string) {
@@ -31,14 +63,12 @@ export function setSetting(key: string, value: any) {
   return setSettings(data)
 }
 
-
-
 export function setArrivalTime(time: string) {
-  const arrivalTime = timeToMondaySecondsEpoch(time);
+  const arrivalTime = timeToMondayEpoch(time)
   console.log(arrivalTime)
-  return setSetting("arrival_time", arrivalTime)
+  return setSetting("arrivalTime", arrivalTime)
 }
 
 export function getArrivalTime(): Promise<string> {
-  return getSetting("arrival_time").then(secondsEpochToTime)
+  return getSetting("arrivalTime").then(epochToTime)
 }

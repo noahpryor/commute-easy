@@ -1,19 +1,16 @@
-
 import SearchResults from "../lib/content/SearchResults"
-
 import updatePageContent from "../lib/updatePageContent"
-
-import {PageContent} from "../lib/interfaces"
-
+import { injectStreeteasyMapOverlay } from "../lib/injectMapOverlay"
 
 function checkForResults() {
   console.log("Checking for search results..")
-  if(SearchResults.visible()) {
+  if (SearchResults.visible()) {
     console.log("listings visible")
-    clearTimeout(timer);
+    clearTimeout(timer)
     updatePageContent(SearchResults)
   }
 }
 
-const timer = setInterval(checkForResults, 1000);
+const timer = setInterval(checkForResults, 1000)
 
+injectStreeteasyMapOverlay()
