@@ -1,4 +1,5 @@
 import {Listing} from "../lib/interfaces"
+import {injectMapOverlay} from "../lib/injectMapOverlay"
 
 function getJSONSearchResultsUrl() {
   return document.location.toString().replace("/search/","/jsonsearch/")
@@ -24,3 +25,8 @@ async function getListings() {
   return results.map(formatResult)
 }
 getListings().then(console.log)
+
+console.log("on listings page")
+
+
+injectMapOverlay()
