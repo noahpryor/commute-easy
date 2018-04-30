@@ -1,19 +1,42 @@
 import {DistanceMatrixApiParams} from "./googleMapsApi"
 import {timeToMondaySecondsEpoch,secondsEpochToTime} from "./dateUtils"
 
-const DEFAULT_SETTINGS: DistanceMatrixApiParams = {
+
+interface Coordinates {
+  latitude: number;
+  longitude: number;
+}
+
+interface Destination {
+  name: string;
+  coordinates: Coordinates;
+}
+
+export interface Settings {
+  mode: string
+  arrival_time: number;
+  units: string;
+  destination: Destination;
+}
+
+const DEFAULT_SETTINGS: Settings = {
   mode: "driving",
   arrival_time: 1525093200, // 10 am
   units: "imperial",
-  origins: "158 powers st 11211",
-  destinations: "16 W 22nd St 10010"
+  destination: {
+    name: "16 West 22nd Street, New York City, New York, United States of America",
+    coordinates: {
+      latitude: 40.7422,
+      longitude: -73.9933
+    }
+  }
 }
 
 interface StringKeyedMap {
   [key: string]: any;
 }
 
-export function getSettings(): Promise<DistanceMatrixApiParams> {
+export function getSettings(): Promise<Settings> {
   return browser.storage.sync.get(DEFAULT_SETTINGS)
 }
 
@@ -30,8 +53,6 @@ export function setSetting(key: string, value: any) {
   data[key] = value
   return setSettings(data)
 }
-
-
 
 export function setArrivalTime(time: string) {
   const arrivalTime = timeToMondaySecondsEpoch(time);

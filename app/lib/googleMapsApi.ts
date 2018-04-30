@@ -41,7 +41,7 @@ export interface DistanceMatrixApiParams {
   mode: string
   arrival_time: number;
   units: string;
-  origins: string;
+  origins?: string;
   destinations: string;
 };
 

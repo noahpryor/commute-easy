@@ -1,8 +1,11 @@
+
 // This file is not going through babel transformation.
 // So, we write it in vanilla JS
 // (But you could use ES2015 features supported by your Node.js version)
 const GlobEntriesPlugin = require('webpack-watched-glob-entries-plugin')
-const { resolve } = require('path')
+const { resolve } = require('path');
+const webpack = require('webpack');
+require('dotenv').config()
 
 module.exports = {
   webpack: (config, { dev, vendor }) => {
@@ -36,6 +39,14 @@ module.exports = {
        exclude: /node_modules/,
        use: 'ts-loader'
      })
+
+
+  // Set environment vars
+    config.plugins.push(
+      new webpack.EnvironmentPlugin({
+        TRAVELTIME_API_KEY: process.env.TRAVELTIME_API_KEY,
+        TRAVELTIME_APP_ID: process.env.TRAVELTIME_APP_ID
+      }))
     // Important: return the modified config
     return config
   }

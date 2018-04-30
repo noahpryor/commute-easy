@@ -24,7 +24,7 @@ async function getListings() {
   const [results] = await fetch(searchUrl).then(res => res.json())
   return results.map(formatResult)
 }
-getListings().then(console.log)
+// getListings().then(console.log)
 
 console.log("on listings page")
 

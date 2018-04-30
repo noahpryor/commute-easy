@@ -52,11 +52,14 @@ describe("#updateListingsWithTrips()", () => {
       duration: "10 minutes",
       distance: "5 miles",
       mode: "transit",
-      directionsUrl: "https://example.com"
+      directionsUrl: "https://example.com",
+      arrivalTime: 12345,
+      origin: "origin address"
     }
+
     const listingWithTrip = {
       location: "40.69530106,-73.9641037",
-      id: "listing_2374346_featured"
+      id: "listing_2374346_featured",
       trip: trip
     }
 

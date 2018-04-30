@@ -1,7 +1,7 @@
-console.log("I am injected")
 // Craigslist globals
 declare const CL: any;
 declare const L: any;
+
 interface Shape {
   shell: number[];
   holes: number[];
@@ -16,15 +16,15 @@ const addShape = (shape: Shape, map: any) => {
   L.polygon([shape.shell, shape.holes]).addTo(map)
 }
 
-const addResultsToMap = (results: Result[], map: any) => {
-  results.map(result => result.shapes.map(shape => addShape(shape, map)))
+const addResultsToMap = (result: Result, map: any) => {
+  result.shapes.map(shape => addShape(shape, map))
 }
 
 const addTransitTimeToMap = async (map: any) => {
-  const data = await fetch("https://distancematrix-api.glitch.me/test/").then(response => response.json())
-  addResultsToMap(data.results, map)
+  const $injectedScript = document.querySelector(".commute-easy-injected-script")
+  const mapData = JSON.parse($injectedScript.dataset.data)
+  addResultsToMap(mapData, map)
 }
-
 
 const timer = setInterval(addMapIfVisible, 1000);
 

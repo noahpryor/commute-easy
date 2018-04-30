@@ -6,6 +6,22 @@ import {
   setArrivalTime
 } from "../lib/commuteSettings";
 
+import {getCommuteTimeMap} from "../lib/travelTimeApi";
+
+
+interface Latlng {
+  lat: number;
+  lng: number;
+}
+
+interface Suggestion {
+  value: string;
+  latlng: Latlng;
+}
+interface EventAutocomplete {
+  suggestion: Suggestion;
+}
+
 const optionSelectors = document.querySelectorAll(".storage-input")
 const arrivalTimeInput: HTMLInputElement = document.querySelector("#arrivalTime")
 
@@ -23,25 +39,8 @@ function saveArrivalTime() {
   setArrivalTime(this.value)
 }
 
-const placeAutocomplete = places({
-  container: document.querySelector('#address-input'),
-});
-
-interface Latlng {
-  lat: number;
-  lng: number;
-}
-
-interface Suggestion {
-  value: string;
-  latlng: Latlng;
-}
-interface EventAutocomplete {
-  suggestion: Suggestion;
-}
-
-placeAutocomplete.on("change", (e: EventAutocomplete) =>{
-  const suggestion = e.suggestion
+const saveDestination = (event: EventAutocomplete) =>  {
+  const { suggestion } = event
   const destination = {
     name: suggestion.value,
     coordinates: {
@@ -51,8 +50,28 @@ placeAutocomplete.on("change", (e: EventAutocomplete) =>{
   }
   console.log(destination)
 
+
   setSetting("destination", destination)
-})
+    .then(() => {
+      getCommuteTimeMap().then(data => browser.storage.local.set({commuteMap: data}))
+    })
+}
+
+const setupDestinationInput = async () => {
+  const addressInput: HTMLInputElement = document.querySelector('#address-input');
+  const destination = await getSetting("destination")
+
+  addressInput.value = destination.name
+
+  const placeAutocomplete = places({
+    container: addressInput
+  });
+
+  placeAutocomplete.on("change", saveDestination)
+}
+
+
+
 
 // input is a time field, but we send back an epoch to google
 // so we do some work her
@@ -61,18 +80,16 @@ async function setupArrivalTimeInput() {
   console.log(time)
   arrivalTimeInput.value = time
   arrivalTimeInput.addEventListener("change", saveArrivalTime)
-
-
 }
 
-
-
 function setupInput(elem: HTMLInputElement) {
-  console.log("setting up input", elem)
   setInput(elem)
   elem.addEventListener("change", saveInput)
 }
 
 optionSelectors.forEach(setupInput)
+
 setupArrivalTimeInput()
+setupDestinationInput()
+
 
