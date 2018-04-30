@@ -1,4 +1,4 @@
-import {Trip} from "./interfaces"
+import { Trip } from "./interfaces"
 // Format trip as commute string for display on the site
 export default function formatTrip(trip: Trip): string {
   const destination = trip.destination.split(",")[0]

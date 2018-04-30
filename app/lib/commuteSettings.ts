@@ -1,28 +1,22 @@
-import {
-  DistanceMatrixApiParams
-} from "./googleMapsApi"
-import {
-  timeToMondaySecondsEpoch,
-  secondsEpochToTime
-} from "./dateUtils"
-import {getCommuteTimeMap} from "./travelTimeApi";
-
+import { DistanceMatrixApiParams } from "./googleMapsApi"
+import { timeToMondaySecondsEpoch, secondsEpochToTime } from "./dateUtils"
+import { getCommuteTimeMap } from "./travelTimeApi"
 
 interface Coordinates {
-  latitude: number;
-  longitude: number;
+  latitude: number
+  longitude: number
 }
 
 interface Destination {
-  name: string;
-  coordinates: Coordinates;
+  name: string
+  coordinates: Coordinates
 }
 
 export interface Settings {
   mode: string
-  arrival_time: number;
-  units: string;
-  destination: Destination;
+  arrival_time: number
+  units: string
+  destination: Destination
 }
 
 const DEFAULT_SETTINGS: Settings = {
@@ -30,22 +24,23 @@ const DEFAULT_SETTINGS: Settings = {
   arrival_time: 1525093200, // 10 am
   units: "imperial",
   destination: {
-    name: "16 West 22nd Street, New York City, New York, United States of America",
+    name:
+      "16 West 22nd Street, New York City, New York, United States of America",
     coordinates: {
       latitude: 40.7422,
-      longitude: -73.9933
-    }
-  }
+      longitude: -73.9933,
+    },
+  },
 }
 
 interface StringKeyedMap {
-  [key: string]: any;
+  [key: string]: any
 }
 
 function updateCommuteTimeMapCache() {
   return getCommuteTimeMap()
-           .then(data => browser.storage.local.set({commuteMap: data}))
-           .then(() => console.log("Commute map cache updated"))
+    .then(data => browser.storage.local.set({ commuteMap: data }))
+    .then(() => console.log("Commute map cache updated"))
 }
 
 export function getSettings(): Promise<Settings> {
@@ -53,8 +48,7 @@ export function getSettings(): Promise<Settings> {
 }
 
 export function setSettings(data: any) {
-  return browser.storage.sync.set(data)
-          .then(updateCommuteTimeMapCache)
+  return browser.storage.sync.set(data).then(updateCommuteTimeMapCache)
 }
 
 export function getSetting(key: string) {
@@ -68,7 +62,7 @@ export function setSetting(key: string, value: any) {
 }
 
 export function setArrivalTime(time: string) {
-  const arrivalTime = timeToMondaySecondsEpoch(time);
+  const arrivalTime = timeToMondaySecondsEpoch(time)
   console.log(arrivalTime)
   return setSetting("arrival_time", arrivalTime)
 }

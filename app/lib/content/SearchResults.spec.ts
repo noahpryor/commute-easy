@@ -1,4 +1,4 @@
-import SearchResults from "./SearchResults";
+import SearchResults from "./SearchResults"
 
 // Street easy search results page
 const searchResultsPage = `
@@ -34,11 +34,11 @@ describe("#listings()", () => {
 
     const listings = SearchResults.listings()
 
-    expect(listings).toHaveLength(1);
+    expect(listings).toHaveLength(1)
 
     expect(listings[0]).toEqual({
       location: "40.69530106,-73.9641037",
-      id: "listing_2374346_featured"
+      id: "listing_2374346_featured",
     })
   })
 })
@@ -54,13 +54,13 @@ describe("#updateListingsWithTrips()", () => {
       mode: "transit",
       directionsUrl: "https://example.com",
       arrivalTime: 12345,
-      origin: "origin address"
+      origin: "origin address",
     }
 
     const listingWithTrip = {
       location: "40.69530106,-73.9641037",
       id: "listing_2374346_featured",
-      trip: trip
+      trip: trip,
     }
 
     SearchResults.updateListingsWithTrips([listingWithTrip])
@@ -79,4 +79,3 @@ describe("#updateListingsWithTrips()", () => {
     expect(document.body.innerHTML).toEqual(contentAfterAddition)
   })
 })
-
