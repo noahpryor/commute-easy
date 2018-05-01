@@ -30,10 +30,24 @@ const uploadPackage = (packagePath, token) => {
       return response
     })
 }
+// https://developer.chrome.com/webstore/webstore_api/items/publish
+const publishExtension = (target, token) => {
+  return webStore.publish(target, token)
+    .then(response => {
+      const [status] = response.status
+      if(status === "OK") {
+        return response
+      }
+      else {
+        const error = new Error(`${response.statusDetail.join(",")} Publishing extension failed`)
+        error.response = response
+        return Promise.reject(error)
+      }
+    }
+}
 
 const uploadChromeExtension = async (target="default") => {
   try {
-
     //  Read file name and version from package.json
     const {name, version} = await readJson("package.json")
     const browser = "chrome";
@@ -41,9 +55,11 @@ const uploadChromeExtension = async (target="default") => {
 
     const token = await webStore.fetchToken()
 
+    console.log("Beginning upload")
     const uploadResponse = await uploadPackage(packagePath, token)
 
-    const publishResponse = await webStore.publish(target, token)
+    console.log(`Uploaded ${name} - ${version} succesfully!`)
+    const publishResponse = await publishExtension(target, token)
 
     console.log("Package published", publishResponse)
 
