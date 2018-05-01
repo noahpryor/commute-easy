@@ -12,13 +12,22 @@
     "preversion": "npm test",
     "version": "npm run build-prod",
     "postversion": "git push && git push --tags",
-    "publish-chrome": "node deploy.js"
+    "publish-chrome": "node deploy.js",
+    "format": "prettier app/**/*.ts app/**/*.json  --write",
+    "lint": "prettier app/**/*.ts app/**/*.json  --list-different",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,ts}": ["prettier --write", "git add"]
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^58.0.2",
     "chrome-webstore-upload": "^0.2.2",
     "dotenv": "^5.0.1",
     "fs-extra": "^5.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.5",
+    "prettier": "^1.12.1",
     "ts-loader": "^4.2.0",
     "typescript": "^2.8.3",
     "webextension-toolbox": "latest"
@@ -34,13 +43,6 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
