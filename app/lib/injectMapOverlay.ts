@@ -3,8 +3,11 @@ import { getSettings } from "./commuteSettings";
 const SCRIPT_DATA_ATTRIBUTE = "commute-easy-source";
 
 const scriptOnPage = (scriptPath: string) => {
-  document.querySelector(`script[${SCRIPT_DATA_ATTRIBUTE}="${scriptPath}"]`) !==
-    null;
+  return (
+    document.querySelector(
+      `script[${SCRIPT_DATA_ATTRIBUTE}="${scriptPath}"]`
+    ) !== null
+  );
 };
 
 const loadScriptContent = (scriptPath: string) => {
@@ -30,7 +33,6 @@ const addScript = async (scriptPath: string, data: any) => {
 
   script.classList.add("commute-easy-injected-script");
   script.dataset.data = JSON.stringify(data);
-
   script.setAttribute(SCRIPT_DATA_ATTRIBUTE, scriptPath);
   script.textContent = scriptText;
   return document.head.appendChild(script);

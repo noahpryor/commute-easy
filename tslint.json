@@ -1,6 +1,10 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
   "jsRules": {},
   "rules": {
     "variable-name": [
@@ -9,7 +13,10 @@
       "check-format",
       "allow-pascal-case",
       "allow-snake-case"
-    ]
+    ],
+    "interface-name": [true, "never-prefix"],
+    "no-console": false,
+    "object-literal-sort-keys": false
   },
   "rulesDirectory": []
 }
