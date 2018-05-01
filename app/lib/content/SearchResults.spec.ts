@@ -49,9 +49,9 @@ describe("#updateListingsWithTrips()", () => {
 
     const trip = {
       destination: "Some place, USA",
-      duration: "10 minutes",
+      duration: "15 minutes",
       distance: "5 miles",
-      mode: "transit",
+      mode: "walking",
       directionsUrl: "https://example.com",
       arrivalTime: 12345,
       origin: "origin address",
