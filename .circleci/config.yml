@@ -29,4 +29,4 @@ jobs:
           command: yarn test
       - run:
           name: build-chrome
-          command: yarn run build chrome
+          command: NODE_ENV=production yarn run build-prod

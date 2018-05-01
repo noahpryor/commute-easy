@@ -7,7 +7,7 @@ const GlobEntriesPlugin = require("webpack-watched-glob-entries-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const dotenv = require("dotenv");
 
-dovent.config();
+dotenv.config();
 
 // This is incredibly brittle but currently its the only plugin without its own name
 const isCopyPlugin = plugin => plugin.constructor.name === "Object";
