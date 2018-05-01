@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "webextension-toolbox dev",
     "build": "webextension-toolbox build",
-    "test": "jest --coverage"
+    "build-prod": "NODE_ENV=production webextension-toolbox build chrome",
+    "test": "jest --coverage",
+    "preversion": "npm test",
+    "version": "npm run build-prod",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^58.0.2",
