@@ -10,14 +10,25 @@ interface Shape {
 
 interface Result {
   shapes: Shape[]
+  mode: string;
+  commuteMinutes: number;
 }
 
 const addShape = (shape: Shape, map: any) => {
-  L.polygon([shape.shell, shape.holes], {color: "#1EB300", opacity: 0.3}).addTo(map)
+  return L.polygon(
+                                       [shape.shell, shape.holes],
+                                       {
+                                         color: "#1EB300",
+                                         opacity: 0.3
+                                       }).addTo(map)
+
+
 }
 
 const addResultsToMap = (result: Result, map: any) => {
-  return result.shapes.map(shape => addShape(shape, map))
+  const [shape] = result.shapes.map(shape => addShape(shape, map))
+  const tooltip = `within ${result.commuteMinutes}m ${result.mode}`
+  shape.bindTooltip(tooltip)
 }
 
 // Map polygons are embedded as json in the data-data attribute
@@ -31,8 +42,9 @@ const getTransitMapData = () => {
 
 export function addTransitTimeToMap(map: any) {
   try {
-    const mapData = getTransitMapData()
-    addResultsToMap(mapData, map)
+    const {mapLayer} = getTransitMapData()
+
+    addResultsToMap(mapLayer, map)
   } catch (e) {
     console.error("CommuteEasy: Adding transit data to map failed", e)
   }

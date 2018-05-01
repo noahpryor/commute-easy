@@ -61,17 +61,25 @@ const getTravelTimeMap = (params: TravelTimeMapParams) => {
   return post("https://api.traveltimeapp.com/v4/time-map", body)
 }
 
-const getCommuteTimeMap = async () => {
-  const settings = await getSettings()
+const getCommuteTimeMap = async (settings: Settings) => {
   const arrivalTime = new Date(settings.arrivalTime)
   const coordinates = settings.destination.coordinates
   const commuteSeconds = settings.commuteMinutes * 60
-  return getTravelTimeMap({
+
+
+  const {results} = await getTravelTimeMap({
     arrivalTime,
     commuteSeconds,
     mode: settings.mode,
     ...coordinates,
-  }).then((data: any) => data.results[0])
+  })
+  const {shapes} = results[0]
+  return {
+    arrivalTime,
+    shapes,
+    commuteMinutes: settings.commuteMinutes,
+    mode: settings.mode
+  }
 }
 
 export { getCommuteTimeMap }

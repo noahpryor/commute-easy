@@ -35,6 +35,15 @@
               <label for="commuteMinutes">Max Commute (minutes)</label>
               <input type="number" class="storage-input full-width" name="commuteMinutes" id="commuteMinutes" />
             </div>
+
+            <div class="pure-control-group">
+              <span id="status-loading" class="pure-form-message-inline hidden">Updating commute map data..</span>
+
+              <span id="status-success" class="pure-form-message-inline hidden">Updated! Refresh to see the new map</span>
+              <span id="status-error" class="pure-form-message-inline hidden">Oh no, something went wrong</span>
+
+            </div>
+
         </fieldset>
     </form>
 

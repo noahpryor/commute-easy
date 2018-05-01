@@ -21,7 +21,7 @@ export interface Settings {
 }
 
 const DEFAULT_SETTINGS: Settings = {
-  mode: "driving",
+  mode: "transit",
   arrivalTime: 1525093200000, // 10 am
   units: "imperial",
   commuteMinutes: 30,
@@ -39,10 +39,10 @@ interface StringKeyedMap {
   [key: string]: any
 }
 
-function updateCommuteTimeMapCache() {
-  return getCommuteTimeMap()
-    .then(data => browser.storage.local.set({ commuteMap: data }))
-    .then(() => console.log("Commute map cache updated"))
+function updateCommuteTimeMapCache(settings: Settings) {
+  return getCommuteTimeMap(settings)
+    .then((data: any) => browser.storage.local.set({ commuteMap: data }))
+    .then(() => console.log("Commute map cache updated", settings))
 }
 
 export function getSettings(): Promise<Settings> {
@@ -50,7 +50,7 @@ export function getSettings(): Promise<Settings> {
 }
 
 export function setSettings(data: any) {
-  return browser.storage.sync.set(data).then(updateCommuteTimeMapCache)
+  return browser.storage.sync.set(data).then(getSettings).then(updateCommuteTimeMapCache)
 }
 
 export function getSetting(key: string) {

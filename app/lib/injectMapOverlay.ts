@@ -12,11 +12,8 @@ const loadScriptContent = (scriptPath: string) => {
   return fetch(scriptUrl).then(response => response.text())
 }
 
-const getMapData = () => {
-  return browser.storage.local
-    .get("commuteMap")
-    .then((data: any) => data.commuteMap)
-}
+const getMapLayer = () => browser.storage.local.get("commuteMap").then(data => data.commuteMap)
+
 
 // Chrome extensions don't have access to the JS runtime, which we need to modify a leaflet
 // map, so we fetch the contents of a script from the extension and then inject it as an
@@ -33,18 +30,18 @@ const addScript = async (scriptPath: string, data: any) => {
 
   script.classList.add("commute-easy-injected-script")
   script.dataset.data = JSON.stringify(data)
+
   script.setAttribute(SCRIPT_DATA_ATTRIBUTE, scriptPath)
   script.textContent = scriptText
   return document.head.appendChild(script)
 }
 
 export async function injectStreeteasyMapOverlay() {
-  const mapData = await getMapData()
-  addScript("scripts/streeteasyMapOverlay.js", mapData)
+  const mapLayer = await getMapLayer()
+  addScript("scripts/streeteasyMapOverlay.js", mapLayer)
 }
 
 export async function injectCraigslistMapOverlay() {
-  const mapData = await getMapData()
-  console.log(mapData)
-  addScript("scripts/craigslistMapOverlay.js", mapData)
+  const mapLayer = await getMapLayer()
+  addScript("scripts/craigslistMapOverlay.js", {mapLayer})
 }

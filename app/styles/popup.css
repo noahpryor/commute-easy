@@ -5,10 +5,13 @@ body {
   padding-right: 5px;
   line-height: 1.4;
   width: 300px;
-  /*background-color: #eee;*/
 }
 
 
 .full-width {
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }

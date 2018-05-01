@@ -3,23 +3,30 @@
 import { Listing, ListingWithTrip, PageContent } from "../interfaces"
 import formatTrip from "../formatTrip"
 
-function parseListingData(listing: HTMLElement): Listing {
-  const location: string = listing.getAttribute("se:map:point")
-  const id = listing.id
+function parseListingData($listing: HTMLElement): Listing {
+  const location: string = $listing.getAttribute("se:map:point")
+  const id = $listing.id
   return {
     location,
     id,
   }
 }
 
+// const $listingCommute = ($listing: HTMLElement) =>
+//
 // Add commute time to the listing
 function addTripToListing(listing: ListingWithTrip): ListingWithTrip {
-  const priceElement = document.querySelector(`#${listing.id} ul.details_info`)
+  const $listing = document.getElementById(listing.id)
+
+  const priceElement = $listing.querySelector(`#${listing.id} ul.details_info`)
     .parentElement
-  const commuteExists = document.querySelector(`#${listing.id}-commute`)
+  const commuteExists = $listing.querySelector(`.commute-easy`)
   if (!commuteExists) {
-    console.debug("Commute already added for", listing.id)
     priceElement.insertAdjacentHTML("afterend", commuteInfoListItem(listing))
+  }
+  else {
+    console.debug("Commute already added for", listing.id)
+
   }
   return listing
 }

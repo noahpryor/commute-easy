@@ -36,7 +36,7 @@
         "https://streeteasy.com/**/*"
       ],
       "js": [
-        "scripts/streeteasySearch.ts"
+        "scripts/streeteasySearch.js"
       ],
       "run_at": "document_end",
       "all_frames": false
