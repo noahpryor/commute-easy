@@ -1,6 +1,6 @@
 {
   "name": "CommuteEasy",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Show commute times on StreetEasy listings",
   "license": "MIT",
   "scripts": {
