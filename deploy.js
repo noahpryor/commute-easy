@@ -13,7 +13,7 @@ const webStore = chromeWebstoreUpload({
 });
 
 const UPLOAD_FAILURE_STATES = ["FAILURE", "NOT_FOUND"];
-/// response: https://developer.chrome.com/webstore/webstore_api/items#resource
+// response: https://developer.chrome.com/webstore/webstore_api/items#resource
 const uploadPackage = (packagePath, token) => {
   return webStore
     .uploadExisting(createReadStream(packagePath), token)
