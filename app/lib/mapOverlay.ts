@@ -8,7 +8,7 @@ interface Shape {
   holes: number[];
 }
 
-interface Result {
+interface MapLayer {
   shapes: Shape[];
   mode: string;
   commuteMinutes: number;
@@ -28,7 +28,11 @@ const createCommuteLayerGroup = (shapes: Shape[]) => {
 
 // Map polygons are embedded as json in the data-data attribute
 // on the script tag
-const getTransitMapData = () => {
+interface InjectedData {
+  mapLayer: MapLayer;
+}
+
+const getTransitMapData = (): InjectedData => {
   const $injectedScript = document.querySelector(
     ".commute-easy-injected-script"
   );
@@ -37,8 +41,9 @@ const getTransitMapData = () => {
 
 export function addTransitTimeToMap(map: any) {
   try {
-    const { shapes, mode, commuteMinutes } = getTransitMapData();
-
+    const { mapLayer } = getTransitMapData();
+    const { shapes, mode, commuteMinutes } = mapLayer;
+    console.log(getTransitMapData());
     const commuteLayer = createCommuteLayerGroup(shapes);
     const layerGroupName = `<${commuteMinutes}m ${mode}`;
 
