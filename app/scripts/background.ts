@@ -1,9 +1,9 @@
 // Dispatches requests to the google transit api
 // Used to bypass cors in the content script;
-import getTripsForListings from "../lib/getTripsForListings";
 import { getSettings } from "../lib/commuteSettings";
-import { getCommuteTimeMap } from "../lib/travelTimeApi";
+import getTripsForListings from "../lib/getTripsForListings";
 import { Listing } from "../lib/interfaces";
+import { getCommuteTimeMap } from "../lib/travelTimeApi";
 
 interface MessageData {
   listings: Listing[];

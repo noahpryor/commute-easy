@@ -1,7 +1,7 @@
+import { epochToTime, timeToMondayEpoch } from "./dateUtils";
 import { DistanceMatrixApiParams } from "./googleMapsApi";
-import { timeToMondayEpoch, epochToTime } from "./dateUtils";
-import { getCommuteTimeMap } from "./travelTimeApi";
 import { StringKeyedMap } from "./interfaces";
+import { getCommuteTimeMap } from "./travelTimeApi";
 interface Coordinates {
   latitude: number;
   longitude: number;

@@ -1,7 +1,7 @@
 // Runs on search results pages like https://streeteasy.com/for-rent/nyc
 // and adds listing results
-import { Listing, ListingWithTrip, PageContent } from "../interfaces";
 import formatTrip from "../formatTrip";
+import { Listing, ListingWithTrip, PageContent } from "../interfaces";
 
 function parseListingData($listing: HTMLElement): Listing {
   const location: string = $listing.getAttribute("se:map:point");
@@ -64,8 +64,8 @@ const updateListingsWithTrips = (
 };
 
 const SearchResults: PageContent = {
+  updateListingsWithTrips,
   visible: listingsVisible,
   listings: getListings,
-  updateListingsWithTrips: updateListingsWithTrips,
 };
 export default SearchResults;

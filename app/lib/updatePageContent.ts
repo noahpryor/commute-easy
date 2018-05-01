@@ -1,4 +1,4 @@
-import { PageContent, Listing, ListingWithTrip } from "./interfaces";
+import { Listing, ListingWithTrip, PageContent } from "./interfaces";
 // Update all of the listings in a given apge element with
 // the trip time information
 

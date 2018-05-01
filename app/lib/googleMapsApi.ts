@@ -124,10 +124,10 @@ export function buildGoogleMapsDirectionUrl(options: DirectionsOptions) {
   const { origin, mode, destination } = options;
 
   const params: DirectionsParams = {
-    api: 1,
-    travelmode: mode,
     origin,
     destination,
+    api: 1,
+    travelmode: mode,
   };
   return buildUrl(DIRECTIONS_URL, params);
 }

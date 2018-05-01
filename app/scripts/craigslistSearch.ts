@@ -1,5 +1,5 @@
-import { Listing } from "../lib/interfaces";
 import { injectCraigslistMapOverlay } from "../lib/injectMapOverlay";
+import { Listing } from "../lib/interfaces";
 
 function getJSONSearchResultsUrl() {
   return document.location.toString().replace("/search/", "/jsonsearch/");
@@ -9,11 +9,12 @@ interface Result {
   Longitude: number;
   PostingID: number;
 }
+
 const formatResult = (result: Result): Listing => {
   const location = `${result.Latitude}${result.Longitude}`;
   return {
-    id: result.PostingID.toString(),
     location,
+    id: result.PostingID.toString(),
   };
 };
 // Hit the maps API to get the lat longs for listings

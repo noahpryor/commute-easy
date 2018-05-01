@@ -4,7 +4,7 @@ import { Trip } from "./interfaces";
 export default function formatTrip(trip: Trip): string {
   const destination = trip.destination.split(",")[0];
   const tripString =
-    trip.mode == "transit"
+    trip.mode === "transit"
       ? trip.duration
       : `${trip.duration}, ${trip.distance}`;
 

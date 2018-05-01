@@ -58,9 +58,9 @@ describe("#updateListingsWithTrips()", () => {
     };
 
     const listingWithTrip = {
+      trip,
       location: "40.69530106,-73.9641037",
       id: "listing_2374346_featured",
-      trip: trip,
     };
 
     SearchResults.updateListingsWithTrips([listingWithTrip]);

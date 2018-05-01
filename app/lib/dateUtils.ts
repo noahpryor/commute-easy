@@ -17,8 +17,8 @@ export function timeToMondayEpoch(time: string): number {
   const now = new Date();
   const [hours, minutes] = time.split(":");
   const nextMonday = getNextDayOfWeek(now, 1);
-  nextMonday.setHours(parseInt(hours));
-  nextMonday.setMinutes(parseInt(minutes));
+  nextMonday.setHours(parseInt(hours, 10));
+  nextMonday.setMinutes(parseInt(minutes, 10));
   nextMonday.setSeconds(0);
   return nextMonday.valueOf();
 }

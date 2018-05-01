@@ -1,9 +1,9 @@
 import * as places from "places.js";
 import {
-  getSetting,
-  setSetting,
   getArrivalTime,
+  getSetting,
   setArrivalTime,
+  setSetting,
 } from "../lib/commuteSettings";
 
 import { getCommuteTimeMap } from "../lib/travelTimeApi";

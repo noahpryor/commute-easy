@@ -1,6 +1,6 @@
 import SearchResults from "../lib/content/SearchResults";
-import updatePageContent from "../lib/updatePageContent";
 import { injectStreeteasyMapOverlay } from "../lib/injectMapOverlay";
+import updatePageContent from "../lib/updatePageContent";
 
 function checkForResults() {
   console.log("Checking for search results..");

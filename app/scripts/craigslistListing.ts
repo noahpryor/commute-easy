@@ -1,11 +1,11 @@
 // Add commute times to individual craigslist listing pages
-import { getTripsForListings } from "../lib/updatePageContent";
 import formatTrip from "../lib/formatTrip";
-import { Listing, ListingWithTrip } from "../lib/interfaces";
 import { injectCraigslistMapOverlay } from "../lib/injectMapOverlay";
+import { Listing, ListingWithTrip } from "../lib/interfaces";
+import { getTripsForListings } from "../lib/updatePageContent";
 
 const getPostId = () => {
-  let pathParts = document.location.pathname.split("/");
+  const pathParts = document.location.pathname.split("/");
   const fileName = pathParts[pathParts.length - 1];
   const postId = fileName.split(".")[0];
   return postId;

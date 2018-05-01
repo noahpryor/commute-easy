@@ -1,4 +1,4 @@
-import { Settings, getSettings } from "./commuteSettings";
+import { getSettings, Settings } from "./commuteSettings";
 
 declare const process: any;
 

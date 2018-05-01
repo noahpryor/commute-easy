@@ -1,9 +1,9 @@
-import { Listing, Trip, ListingWithTrip } from "./interfaces";
 import {
-  DistanceMatrixApiParams,
   buildGoogleMapsDirectionUrl,
+  DistanceMatrixApiParams,
   getTrips,
 } from "./googleMapsApi";
+import { Listing, ListingWithTrip, Trip } from "./interfaces";
 
 const mapTripsToListings = (
   trips: Trip[],
