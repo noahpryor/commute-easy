@@ -2,10 +2,17 @@
 // This file is not going through babel transformation.
 // So, we write it in vanilla JS
 // (But you could use ES2015 features supported by your Node.js version)
-const GlobEntriesPlugin = require('webpack-watched-glob-entries-plugin')
 const { resolve } = require('path');
 const webpack = require('webpack');
+const GlobEntriesPlugin = require('webpack-watched-glob-entries-plugin');
+const CopyPlugin = require('copy-webpack-plugin')
+
+
 require('dotenv').config()
+
+
+// This is incredibly brittle but currently its the only plugin without its own name
+const isCopyPlugin = (plugin) => plugin.constructor.name === "Object"
 
 module.exports = {
   webpack: (config, { dev, vendor }) => {
@@ -15,6 +22,7 @@ module.exports = {
       extensions: ['.js', '.json', '.mjs', '.jsx', '.ts', '.tsx', '.d.ts']
     }
 
+    const src = 'app'
     /******************************/
     /*       WEBPACK.ENTRY        */
     /******************************/
@@ -22,7 +30,7 @@ module.exports = {
 
     // Add main entry glob
     // entries.push(resolve('app', '*.{ts,tsx,js,mjs,jsx}'))
-    entries.push(resolve('app', '?(scripts)/*.{ts,tsx,js,mjs,jsx}'))
+    entries.push(resolve(src, '?(scripts)/*.{ts,tsx,js,mjs,jsx}'))
 
     // We use the GlobEntriesPlugin in order to
     // restart the compiler in watch mode, when new
@@ -30,6 +38,28 @@ module.exports = {
     config.entry = GlobEntriesPlugin.getEntries(
       entries
     )
+
+    // original: https://git.io/vp04H
+    // Replace CopyPlugin with one that ignores typescript files as well
+    //
+    const copyPluginIndex = config.plugins.findIndex(isCopyPlugin)
+
+    config.plugins.splice(copyPluginIndex, 1, new CopyPlugin([
+      {
+        // Copy all files except (.js, .json, _locales)
+        context: resolve(src),
+        from: resolve(src, '**/*'),
+        ignore: [ '**/*.js','**/*.json', '**/*.ts', '**/*.tsx'],
+        to: config.output.path
+      },
+      {
+        // Copy all language json files
+        context: resolve(src),
+        from: resolve(src, '_locales/**/*.json'),
+        to: config.output.path
+      }
+    ]))
+
 
     /*       WEBPACK.LOADERS      */
      /******************************/
