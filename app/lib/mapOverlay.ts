@@ -1,6 +1,6 @@
 // Add a layer displaying transit areas
 // to a provided Leaflet.js map
-
+import {StringKeyedMap} from "./interfaces"
 declare const L: any
 
 interface Shape {
@@ -14,18 +14,18 @@ interface Result {
   commuteMinutes: number
 }
 
-const addShape = (shape: Shape, map: any) => {
+const createPolygon = (shape: Shape) => {
   return L.polygon([shape.shell, shape.holes], {
     color: "#1EB300",
     opacity: 0.3,
-  }).addTo(map)
+  })
 }
 
-const addResultsToMap = (result: Result, map: any) => {
-  const [shape] = result.shapes.map(shape => addShape(shape, map))
-  const tooltip = `within ${result.commuteMinutes}m ${result.mode}`
-  shape.bindTooltip(tooltip)
+const createCommuteLayerGroup = (shapes: Shape[]) => {
+  const polygons = shapes.map(createPolygon)
+  return L.layerGroup(polygons)
 }
+
 
 // Map polygons are embedded as json in the data-data attribute
 // on the script tag
@@ -36,11 +36,27 @@ const getTransitMapData = () => {
   return JSON.parse($injectedScript.getAttribute("data-data"))
 }
 
+
 export function addTransitTimeToMap(map: any) {
   try {
-    const { mapLayer } = getTransitMapData()
+    const {
+      shapes,
+      mode,
+      commuteMinutes
+    } = getTransitMapData()
 
-    addResultsToMap(mapLayer, map)
+    const commuteLayer = createCommuteLayerGroup(shapes)
+    const layerGroupName = `<${commuteMinutes}m ${mode}`
+
+    const layerControls: StringKeyedMap = {}
+
+    layerControls[layerGroupName] = commuteLayer
+    commuteLayer.addTo(map)
+
+    const controls = L.control.layers({},layerControls, {collapsed: false})
+
+    controls.addTo(map)
+    // addResultsToMap(mapLayer, map)
   } catch (e) {
     console.error("CommuteEasy: Adding transit data to map failed", e)
   }

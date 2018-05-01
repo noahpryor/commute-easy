@@ -22,3 +22,9 @@ export interface PageContent {
   listings(): Listing[]
   updateListingsWithTrips(listings: ListingWithTrip[]): void
 }
+
+
+export interface StringKeyedMap {
+  [key: string]: any
+}
+

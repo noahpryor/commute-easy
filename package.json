@@ -11,7 +11,8 @@
     "tdd": "jest --watch",
     "preversion": "npm test",
     "version": "npm run build-prod",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "publish-chrome": "node deploy.js"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^58.0.2",
@@ -25,7 +26,6 @@
   "dependencies": {
     "@types/jest": "^22.2.3",
     "jest": "^22.4.3",
-    "leaflet": "^1.3.1",
     "places.js": "^1.6.0",
     "ts-jest": "^22.4.4"
   },

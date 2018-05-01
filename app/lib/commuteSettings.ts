@@ -1,7 +1,7 @@
 import { DistanceMatrixApiParams } from "./googleMapsApi"
 import { timeToMondayEpoch, epochToTime } from "./dateUtils"
 import { getCommuteTimeMap } from "./travelTimeApi"
-
+import { StringKeyedMap } from "./interfaces"
 interface Coordinates {
   latitude: number
   longitude: number
@@ -33,10 +33,6 @@ const DEFAULT_SETTINGS: Settings = {
       longitude: -73.9933,
     },
   },
-}
-
-interface StringKeyedMap {
-  [key: string]: any
 }
 
 function updateCommuteTimeMapCache(settings: Settings) {
