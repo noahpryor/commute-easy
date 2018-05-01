@@ -66,19 +66,18 @@ const getCommuteTimeMap = async (settings: Settings) => {
   const coordinates = settings.destination.coordinates
   const commuteSeconds = settings.commuteMinutes * 60
 
-
-  const {results} = await getTravelTimeMap({
+  const { results } = await getTravelTimeMap({
     arrivalTime,
     commuteSeconds,
     mode: settings.mode,
     ...coordinates,
   })
-  const {shapes} = results[0]
+  const { shapes } = results[0]
   return {
     arrivalTime,
     shapes,
     commuteMinutes: settings.commuteMinutes,
-    mode: settings.mode
+    mode: settings.mode,
   }
 }
 

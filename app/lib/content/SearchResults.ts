@@ -23,10 +23,8 @@ function addTripToListing(listing: ListingWithTrip): ListingWithTrip {
   const commuteExists = $listing.querySelector(`.commute-easy`)
   if (!commuteExists) {
     priceElement.insertAdjacentHTML("afterend", commuteInfoListItem(listing))
-  }
-  else {
+  } else {
     console.debug("Commute already added for", listing.id)
-
   }
   return listing
 }

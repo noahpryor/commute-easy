@@ -50,7 +50,10 @@ export function getSettings(): Promise<Settings> {
 }
 
 export function setSettings(data: any) {
-  return browser.storage.sync.set(data).then(getSettings).then(updateCommuteTimeMapCache)
+  return browser.storage.sync
+    .set(data)
+    .then(getSettings)
+    .then(updateCommuteTimeMapCache)
 }
 
 export function getSetting(key: string) {

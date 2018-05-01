@@ -12,8 +12,8 @@ const loadScriptContent = (scriptPath: string) => {
   return fetch(scriptUrl).then(response => response.text())
 }
 
-const getMapLayer = () => browser.storage.local.get("commuteMap").then(data => data.commuteMap)
-
+const getMapLayer = () =>
+  browser.storage.local.get("commuteMap").then(data => data.commuteMap)
 
 // Chrome extensions don't have access to the JS runtime, which we need to modify a leaflet
 // map, so we fetch the contents of a script from the extension and then inject it as an
@@ -43,5 +43,5 @@ export async function injectStreeteasyMapOverlay() {
 
 export async function injectCraigslistMapOverlay() {
   const mapLayer = await getMapLayer()
-  addScript("scripts/craigslistMapOverlay.js", {mapLayer})
+  addScript("scripts/craigslistMapOverlay.js", { mapLayer })
 }

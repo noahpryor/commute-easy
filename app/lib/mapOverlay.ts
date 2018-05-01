@@ -10,19 +10,15 @@ interface Shape {
 
 interface Result {
   shapes: Shape[]
-  mode: string;
-  commuteMinutes: number;
+  mode: string
+  commuteMinutes: number
 }
 
 const addShape = (shape: Shape, map: any) => {
-  return L.polygon(
-                                       [shape.shell, shape.holes],
-                                       {
-                                         color: "#1EB300",
-                                         opacity: 0.3
-                                       }).addTo(map)
-
-
+  return L.polygon([shape.shell, shape.holes], {
+    color: "#1EB300",
+    opacity: 0.3,
+  }).addTo(map)
 }
 
 const addResultsToMap = (result: Result, map: any) => {
@@ -42,7 +38,7 @@ const getTransitMapData = () => {
 
 export function addTransitTimeToMap(map: any) {
   try {
-    const {mapLayer} = getTransitMapData()
+    const { mapLayer } = getTransitMapData()
 
     addResultsToMap(mapLayer, map)
   } catch (e) {

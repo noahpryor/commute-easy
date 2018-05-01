@@ -8,7 +8,6 @@ import {
 
 import { getCommuteTimeMap } from "../lib/travelTimeApi"
 
-
 window.browser = browser
 interface Latlng {
   lat: number
@@ -26,11 +25,10 @@ interface EventAutocomplete {
   suggestion: Suggestion
 }
 
-
 const $status = {
   loading: document.getElementById("status-loading"),
   success: document.getElementById("status-success"),
-  error: document.getElementById("status-error")
+  error: document.getElementById("status-error"),
 }
 
 const showElement = (elem: HTMLElement) => elem.classList.remove("hidden")
@@ -53,7 +51,6 @@ const showSuccess = () => {
   hideElement($status.loading)
 }
 
-
 function saveInput() {
   showLoading()
   setSetting(this.name, this.value)
@@ -72,9 +69,7 @@ function saveArrivalTime() {
   setArrivalTime(this.value)
     .then(showSuccess)
     .catch(showError)
-
 }
-
 
 const saveDestination = (event: EventAutocomplete) => {
   const { suggestion } = event
@@ -91,7 +86,6 @@ const saveDestination = (event: EventAutocomplete) => {
   setSetting("destination", destination)
     .then(showSuccess)
     .catch(showError)
-
 }
 
 const setupDestinationInput = async () => {
@@ -103,13 +97,11 @@ const setupDestinationInput = async () => {
   addressInput.value = destination.name
 
   const placeAutocomplete = places({
-    container: addressInput
+    container: addressInput,
   })
 
   placeAutocomplete.on("change", saveDestination)
 }
-
-
 
 // input is a time field, but we send back an epoch to google
 // so we do some work her
