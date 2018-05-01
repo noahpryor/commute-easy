@@ -22,8 +22,11 @@ jobs:
           paths:
             - node_modules/
       - run:
+          name: lint
+          command: yarn run lint
+      - run:
           name: test
           command: yarn test
       - run:
           name: build-chrome
-          command: yarn run build chrome
+          command: NODE_ENV=production yarn run build-prod

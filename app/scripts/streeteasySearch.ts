@@ -1,16 +1,16 @@
-import SearchResults from "../lib/content/SearchResults"
-import updatePageContent from "../lib/updatePageContent"
-import { injectStreeteasyMapOverlay } from "../lib/injectMapOverlay"
+import SearchResults from "../lib/content/SearchResults";
+import { injectStreeteasyMapOverlay } from "../lib/injectMapOverlay";
+import updatePageContent from "../lib/updatePageContent";
 
 function checkForResults() {
-  console.log("Checking for search results..")
+  console.log("Checking for search results..");
   if (SearchResults.visible()) {
-    console.log("listings visible")
-    clearTimeout(timer)
-    updatePageContent(SearchResults)
+    console.log("listings visible");
+    clearTimeout(timer);
+    updatePageContent(SearchResults);
   }
 }
 
-const timer = setInterval(checkForResults, 1000)
+const timer = setInterval(checkForResults, 1000);
 
-injectStreeteasyMapOverlay()
+injectStreeteasyMapOverlay();

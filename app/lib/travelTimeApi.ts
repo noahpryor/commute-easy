@@ -1,6 +1,6 @@
-import { Settings, getSettings } from "./commuteSettings"
+import { getSettings, Settings } from "./commuteSettings";
 
-declare const process: any
+declare const process: any;
 
 const post = (url: string, data: any) => {
   return fetch("https://api.traveltimeapp.com/v4/time-map", {
@@ -17,15 +17,15 @@ const post = (url: string, data: any) => {
     // mode: 'cors', // no-cors, cors, *same-origin
     redirect: "follow", // manual, *follow, error
     referrer: "no-referrer", // *client, no-referrer
-  }).then(response => response.json()) // parses response to JSON
-}
+  }).then(response => response.json()); // parses response to JSON
+};
 
 interface TravelTimeMapParams {
-  latitude: number
-  longitude: number
-  arrivalTime: Date
-  commuteSeconds: number
-  mode: string
+  latitude: number;
+  longitude: number;
+  arrivalTime: Date;
+  commuteSeconds: number;
+  mode: string;
 }
 
 const modeMapping: any = {
@@ -33,10 +33,10 @@ const modeMapping: any = {
   driving: "driving",
   walking: "walking",
   transit: "public_transport",
-}
+};
 
 const getTravelTimeMap = (params: TravelTimeMapParams) => {
-  const transportationType = modeMapping[params.mode]
+  const transportationType = modeMapping[params.mode];
 
   const body = {
     arrival_searches: [
@@ -57,28 +57,28 @@ const getTravelTimeMap = (params: TravelTimeMapParams) => {
         },
       },
     ],
-  }
-  return post("https://api.traveltimeapp.com/v4/time-map", body)
-}
+  };
+  return post("https://api.traveltimeapp.com/v4/time-map", body);
+};
 
 const getCommuteTimeMap = async (settings: Settings) => {
-  const arrivalTime = new Date(settings.arrivalTime)
-  const coordinates = settings.destination.coordinates
-  const commuteSeconds = settings.commuteMinutes * 60
+  const arrivalTime = new Date(settings.arrivalTime);
+  const coordinates = settings.destination.coordinates;
+  const commuteSeconds = settings.commuteMinutes * 60;
 
   const { results } = await getTravelTimeMap({
     arrivalTime,
     commuteSeconds,
     mode: settings.mode,
     ...coordinates,
-  })
-  const { shapes } = results[0]
+  });
+  const { shapes } = results[0];
   return {
     arrivalTime,
     shapes,
     commuteMinutes: settings.commuteMinutes,
     mode: settings.mode,
-  }
-}
+  };
+};
 
-export { getCommuteTimeMap }
+export { getCommuteTimeMap };

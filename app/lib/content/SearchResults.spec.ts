@@ -1,4 +1,4 @@
-import SearchResults from "./SearchResults"
+import SearchResults from "./SearchResults";
 
 // Street easy search results page
 const searchResultsPage = `
@@ -15,37 +15,37 @@ const searchResultsPage = `
  </main>
 </div>
 
-`
+`;
 describe("#visible", () => {
   it("true there is at least one listing on the page", () => {
-    document.body.innerHTML = searchResultsPage
-    expect(SearchResults.visible()).toBe(true)
-  })
+    document.body.innerHTML = searchResultsPage;
+    expect(SearchResults.visible()).toBe(true);
+  });
 
   it("false when there are no articles on the page", () => {
-    document.body.innerHTML = ""
-    expect(SearchResults.visible()).toBe(false)
-  })
-})
+    document.body.innerHTML = "";
+    expect(SearchResults.visible()).toBe(false);
+  });
+});
 
 describe("#listings()", () => {
   it("returns a Listing object for each element on the page", () => {
-    document.body.innerHTML = searchResultsPage
+    document.body.innerHTML = searchResultsPage;
 
-    const listings = SearchResults.listings()
+    const listings = SearchResults.listings();
 
-    expect(listings).toHaveLength(1)
+    expect(listings).toHaveLength(1);
 
     expect(listings[0]).toEqual({
       location: "40.69530106,-73.9641037",
       id: "listing_2374346_featured",
-    })
-  })
-})
+    });
+  });
+});
 
 describe("#updateListingsWithTrips()", () => {
   it("adds the commute string", () => {
-    document.body.innerHTML = searchResultsPage
+    document.body.innerHTML = searchResultsPage;
 
     const trip = {
       destination: "Some place, USA",
@@ -55,27 +55,27 @@ describe("#updateListingsWithTrips()", () => {
       directionsUrl: "https://example.com",
       arrivalTime: 12345,
       origin: "origin address",
-    }
+    };
 
     const listingWithTrip = {
+      trip,
       location: "40.69530106,-73.9641037",
       id: "listing_2374346_featured",
-      trip: trip,
-    }
+    };
 
-    SearchResults.updateListingsWithTrips([listingWithTrip])
+    SearchResults.updateListingsWithTrips([listingWithTrip]);
 
-    const contentAfterAddition = document.body.innerHTML
+    const contentAfterAddition = document.body.innerHTML;
 
-    expect(contentAfterAddition).toContain(trip.duration)
-    expect(contentAfterAddition).toContain(trip.distance)
-    expect(contentAfterAddition).toContain(trip.mode)
-    expect(contentAfterAddition).toContain(trip.directionsUrl)
+    expect(contentAfterAddition).toContain(trip.duration);
+    expect(contentAfterAddition).toContain(trip.distance);
+    expect(contentAfterAddition).toContain(trip.mode);
+    expect(contentAfterAddition).toContain(trip.directionsUrl);
 
-    expect(contentAfterAddition).toContain("Some place")
+    expect(contentAfterAddition).toContain("Some place");
 
     // Running it 2x doesnt' change anything
-    SearchResults.updateListingsWithTrips([listingWithTrip])
-    expect(document.body.innerHTML).toEqual(contentAfterAddition)
-  })
-})
+    SearchResults.updateListingsWithTrips([listingWithTrip]);
+    expect(document.body.innerHTML).toEqual(contentAfterAddition);
+  });
+});

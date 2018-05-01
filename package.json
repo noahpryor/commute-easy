@@ -9,38 +9,50 @@
     "build-prod": "NODE_ENV=production webextension-toolbox build chrome",
     "test": "jest --coverage",
     "tdd": "jest --watch",
-    "preversion": "npm test",
+    "preversion": "npm run lint && npm test",
     "version": "npm run build-prod",
     "postversion": "git push && git push --tags",
-    "publish-chrome": "node deploy.js"
+    "publish-chrome": "node deploy.js",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "prettier:format":
+      "prettier --write *.js *.json app/**/*.ts app/**/*.json  ",
+    "prettier:lint":
+      "prettier --list-different *.js *.json app/**/*.ts app/**/*.json  ",
+    "tslint:format": "tslint --fix --project .",
+    "tslint:lint": "tslint --project .",
+    "format": "npm run prettier:format && npm run tslint:format",
+    "lint": "npm run prettier:lint && npm run tslint:lint",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "places.js": "^1.6.0"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^58.0.2",
     "chrome-webstore-upload": "^0.2.2",
     "dotenv": "^5.0.1",
     "fs-extra": "^5.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.5",
+    "prettier": "^1.12.1",
     "ts-loader": "^4.2.0",
+    "tslint-config-airbnb": "^5.8.0",
     "typescript": "^2.8.3",
-    "webextension-toolbox": "latest"
-  },
-  "dependencies": {
+    "webextension-toolbox": "latest",
+    "ts-jest": "^22.4.4",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.12.0",
     "@types/jest": "^22.2.3",
-    "jest": "^22.4.3",
-    "places.js": "^1.6.0",
-    "ts-jest": "^22.4.4"
+    "jest": "^22.4.3"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md,ts}": ["prettier --write", "git add"]
   },
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
