@@ -4,3 +4,4 @@ packages/
 npm-debug.log
 .env
 coverage/
+yarn-error.log
