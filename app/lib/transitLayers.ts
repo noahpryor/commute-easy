@@ -63,9 +63,9 @@ export async function getSubwayJson() {
   const lineData: any = await fetch(SUBWAY_GEOJSON_URLS.lines).then(res =>
     res.json()
   );
-  const stationData: any = await fetch(SUBWAY_GEOJSON_URLS.stations).then(res =>
-    res.json()
-  );
+  // const stationData: any = await fetch(SUBWAY_GEOJSON_URLS.stations).then(res =>
+  //   res.json()
+  // );
 
   const lines = lineData.features.map((feature: any) => {
     feature.properties.style = routeStyle(feature);
@@ -73,6 +73,6 @@ export async function getSubwayJson() {
   });
   return {
     lines,
-    stations: stationData.features,
+    // stations: stationData.features,
   };
 }

@@ -51,9 +51,6 @@ export async function addTransitTimeToMap(map: any) {
   const { lines } = await getSubwayJson();
   const subwayLineLayer = L.geoJson();
 
-  const subwayStationLayer = L.geoJSON(stations, { onEachFeature });
-  const subwayStationLayerGroup = L.layerGroup([subwayStationLayer]);
-
   lines.forEach((feature: any) => {
     subwayLineLayer.addData(feature);
   });
@@ -65,14 +62,12 @@ export async function addTransitTimeToMap(map: any) {
     const commuteTimeMap = getTransitMapData();
 
     const { shapes, mode, commuteMinutes } = commuteTimeMap;
-    console.log("commuteTimeMap", commuteTimeMap);
-    console.log(getTransitMapData());
+
     const commuteLayerGroup = createCommuteLayerGroup(shapes);
     const layerGroupName = `<${commuteMinutes}m ${mode}`;
 
     const layerControls: StringKeyedMap = {
-      "Subway lines": subwayLineLayerGroup,
-      "Subway stations": subwayStationLayerGroup,
+      Subway: subwayLineLayerGroup,
     };
 
     layerControls[layerGroupName] = commuteLayerGroup;
