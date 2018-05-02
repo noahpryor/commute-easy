@@ -16,19 +16,17 @@ interface MapLayer {
   commuteMinutes: number;
 }
 
-const createPolygon = function createPolygon(shape: Shape) {
+function createPolygon(shape: Shape) {
   return L.polygon([shape.shell, shape.holes], {
     color: "#1EB300",
     opacity: 0.2,
   });
-};
+}
 
-const createCommuteLayerGroup = function createCommuteLayerGroup(
-  shapes: Shape[]
-) {
+function createCommuteLayerGroup(shapes: Shape[]) {
   const polygons = shapes.map(createPolygon);
   return L.layerGroup(polygons);
-};
+}
 
 // Map polygons are embedded as json in the data-data attribute
 // on the script tag
