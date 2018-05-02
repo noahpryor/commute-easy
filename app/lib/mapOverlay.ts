@@ -48,8 +48,7 @@ function onEachFeature(feature, layer) {
 }
 
 export async function addTransitTimeToMap(map: any) {
-  const { lines, stations } = await getSubwayJson();
-  console.log({ lines, stations });
+  const { lines } = await getSubwayJson();
   const subwayLineLayer = L.geoJson();
 
   const subwayStationLayer = L.geoJSON(stations, { onEachFeature });
