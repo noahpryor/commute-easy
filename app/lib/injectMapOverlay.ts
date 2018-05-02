@@ -32,18 +32,14 @@ const addScript = async (scriptPath: string, data: any) => {
   const script = document.createElement("script");
 
   script.classList.add("commute-easy-injected-script");
+  console.log("injecting data", data);
   script.dataset.data = JSON.stringify(data);
   script.setAttribute(SCRIPT_DATA_ATTRIBUTE, scriptPath);
   script.textContent = scriptText;
   return document.head.appendChild(script);
 };
 
-export async function injectStreeteasyMapOverlay() {
+export async function injectMapOverlay(scriptPath: string) {
   const mapLayer = await getMapLayer();
-  addScript("scripts/streeteasyMapOverlay.js", mapLayer);
-}
-
-export async function injectCraigslistMapOverlay() {
-  const mapLayer = await getMapLayer();
-  addScript("scripts/craigslistMapOverlay.js", { mapLayer });
+  addScript(scriptPath, mapLayer);
 }

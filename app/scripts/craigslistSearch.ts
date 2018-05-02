@@ -1,4 +1,4 @@
-import { injectCraigslistMapOverlay } from "../lib/injectMapOverlay";
+import { injectMapOverlay } from "../lib/injectMapOverlay";
 import { Listing } from "../lib/interfaces";
 
 function getJSONSearchResultsUrl() {
@@ -29,4 +29,4 @@ async function getListings() {
 
 console.log("on listings page");
 
-injectCraigslistMapOverlay();
+injectMapOverlay("scripts/craigslistMapOverlay.js");

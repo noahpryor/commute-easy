@@ -1,6 +1,6 @@
 // Add commute times to individual craigslist listing pages
 import formatTrip from "../lib/formatTrip";
-import { injectCraigslistMapOverlay } from "../lib/injectMapOverlay";
+import { injectMapOverlay } from "../lib/injectMapOverlay";
 import { Listing, ListingWithTrip } from "../lib/interfaces";
 import { getTripsForListings } from "../lib/updatePageContent";
 
@@ -43,4 +43,4 @@ updateListings();
 // Content scripts don't share a js context/environ,ent
 // with the page, so to add transit data to maps
 // we have to inject a script
-injectCraigslistMapOverlay();
+injectMapOverlay("scripts/craigslistMapOverlay.js");

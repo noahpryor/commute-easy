@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eux
 convert logo.svg -resize 128 -format png -transparent white app/images/icon-128.png
 convert logo.svg -resize 16 -format png -transparent white app/images/icon-16.png
 convert logo.svg -resize 19 -format png -transparent white app/images/icon-19.png

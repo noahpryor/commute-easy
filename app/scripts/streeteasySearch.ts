@@ -1,5 +1,5 @@
 import SearchResults from "../lib/content/SearchResults";
-import { injectStreeteasyMapOverlay } from "../lib/injectMapOverlay";
+import { injectMapOverlay } from "../lib/injectMapOverlay";
 import updatePageContent from "../lib/updatePageContent";
 
 function checkForResults() {
@@ -13,4 +13,4 @@ function checkForResults() {
 
 const timer = setInterval(checkForResults, 1000);
 
-injectStreeteasyMapOverlay();
+injectMapOverlay("scripts/streeteasyMapOverlay.js");
