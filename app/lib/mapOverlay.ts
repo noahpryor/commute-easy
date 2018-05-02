@@ -34,14 +34,14 @@ interface InjectedData {
   mapLayer: MapLayer;
 }
 
-function getTransitMapData(): InjectedData {
+function getTransitMapData() {
   const $injectedScript = document.querySelector(
     ".commute-easy-injected-script"
   );
   return JSON.parse($injectedScript.getAttribute("data-data"));
 }
 
-function onEachFeature(feature, layer) {
+function onEachFeature(feature: any, layer: any) {
   layer.bindPopup(`${feature.properties.line} - ${feature.properties.name}`);
 }
 

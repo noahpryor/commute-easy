@@ -1,4 +1,4 @@
-export function routeStyle(feature) {
+export function routeStyle(feature: any) {
   switch (feature.properties.rt_symbol) {
     case "1":
       return { color: "#EE352E" };
